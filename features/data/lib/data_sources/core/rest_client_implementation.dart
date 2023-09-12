@@ -1,0 +1,72 @@
+import 'package:data/data_sources/core/rest_client.dart';
+import 'package:dio/dio.dart';
+
+class RestClientImplementation extends RestClient {
+  final Dio _dio = Dio();
+
+  @override
+  Future<Response<T>> get<T>({
+    required String path,
+    required String baseUrl,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _dio.options.baseUrl = baseUrl;
+    return await _dio.get<T>(
+      path,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+
+  @override
+  Future<Response<T>> post<T>({
+    required String path,
+    required String baseUrl,
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _dio.options.baseUrl = baseUrl;
+    return await _dio.post(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+
+  @override
+  Future<Response<T>> put<T>({
+    required String path,
+    required String baseUrl,
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _dio.options.baseUrl = baseUrl;
+    return await _dio.put<T>(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+
+  @override
+  Future<Response<T>> delete<T>({
+    required String path,
+    required String baseUrl,
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _dio.options.baseUrl = baseUrl;
+    return await _dio.delete<T>(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+}

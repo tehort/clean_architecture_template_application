@@ -1,0 +1,20 @@
+name: core
+description: A starting point for Dart libraries or applications.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  get_it: ^7.6.4
+  data: 
+    path: ../data
+  presentation:
+    path: ../presentation
+  domain:
+    path: ../domain
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  test: ^1.21.0

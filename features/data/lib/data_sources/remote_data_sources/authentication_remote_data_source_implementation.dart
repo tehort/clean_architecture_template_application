@@ -5,15 +5,15 @@ import 'package:data/models/authentication_sign_in_response_model.dart';
 import 'package:data/utils/api_constants.dart';
 
 class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemoteDataSource {
-  final RestClient _apiClient;
-
   AuthenticationRemoteDataSourceImplementation({
-    required apiClient,
+    required RestClient apiClient,
   }) : _apiClient = apiClient;
+
+  final RestClient _apiClient;
 
   @override
   Future<AuthenticationSignInResponseModel> signIn({required String username, required String password}) async {
-    final response = await _apiClient.post(
+    final response = await _apiClient.post<AuthenticationSignInResponseModel>(
       baseUrl: ApiEndpointsConstants.baseUrl,
       path: ApiEndpointsConstants.userSignIn,
       data: AuthenticationSignInRequestModel(
@@ -21,9 +21,9 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
         password: password,
       ).toJson(),
     );
+
     if (response.statusCode == 200) {
-      await Future.delayed(Duration(seconds: 1));
-      return AuthenticationSignInResponseModel.fromMap(response.data);
+      return response.data!;
     } else {
       throw Exception();
     }

@@ -11,6 +11,7 @@ class RestClientImplementation extends RestClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
     return _dio.get<T>(
       path,
@@ -27,6 +28,7 @@ class RestClientImplementation extends RestClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
     return _dio.post(
       path,
@@ -44,6 +46,7 @@ class RestClientImplementation extends RestClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
     return _dio.put<T>(
       path,
@@ -61,6 +64,7 @@ class RestClientImplementation extends RestClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
     return _dio.delete<T>(
       path,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProgressHud extends StatelessWidget {
-  const ProgressHud({Key? key, this.isTransparent = false}) : super(key: key);
+  const ProgressHud({super.key, this.isTransparent = false});
 
   final bool isTransparent;
 

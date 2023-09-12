@@ -1,12 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class AuthenticationSignInResponseModel extends Equatable {
-  final double id;
-  final String firstName;
-  final String lastName;
-  final String username;
-  final String token;
-
   const AuthenticationSignInResponseModel({
     required this.id,
     required this.firstName,
@@ -14,15 +8,6 @@ class AuthenticationSignInResponseModel extends Equatable {
     required this.username,
     required this.token,
   });
-
-  @override
-  List<Object?> get props => [
-        id,
-        firstName,
-        lastName,
-        username,
-        token,
-      ];
 
   factory AuthenticationSignInResponseModel.fromMap(Map<String, dynamic> map) {
     return AuthenticationSignInResponseModel(
@@ -33,4 +18,18 @@ class AuthenticationSignInResponseModel extends Equatable {
       token: map['token'] ?? '',
     );
   }
+  final double id;
+  final String firstName;
+  final String lastName;
+  final String username;
+  final String token;
+
+  @override
+  List<Object?> get props => [
+        id,
+        firstName,
+        lastName,
+        username,
+        token,
+      ];
 }

@@ -4,7 +4,7 @@ import 'package:presentation/src/sign_in/bloc/sign_in_bloc.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
 class SignInForm extends StatelessWidget {
-  const SignInForm({Key? key}) : super(key: key);
+  const SignInForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,10 @@ class SignInForm extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Align(
-                alignment: Alignment.center,
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(38.0, 0, 38.0, 8.0),
+                  padding: const EdgeInsets.fromLTRB(38, 0, 38, 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const _AppText(),
                       _UsernameInputField(),
@@ -33,7 +31,7 @@ class SignInForm extends StatelessWidget {
                 ),
               ),
             ),
-            state is SignInLoadingState ? const ProgressHud() : Container(),
+            if (state is SignInLoadingState) const ProgressHud(),
           ],
         );
       },
@@ -42,12 +40,12 @@ class SignInForm extends StatelessWidget {
 }
 
 class _AppText extends StatelessWidget {
-  const _AppText({Key? key}) : super(key: key);
+  const _AppText();
 
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
+      padding: EdgeInsets.only(bottom: 30, top: 30),
       child: Text(
         'My App',
         textAlign: TextAlign.center,
@@ -88,7 +86,7 @@ class _PasswordInputField extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  const _LoginButton({Key? key}) : super(key: key);
+  const _LoginButton();
 
   @override
   Widget build(BuildContext context) {
@@ -102,12 +100,12 @@ class _LoginButton extends StatelessWidget {
 }
 
 class _SignUpText extends StatelessWidget {
-  const _SignUpText({Key? key}) : super(key: key);
+  const _SignUpText();
 
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'Don\'t have an account yet?',
+      "Don't have an account yet?",
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
     );
@@ -115,9 +113,7 @@ class _SignUpText extends StatelessWidget {
 }
 
 class _SignUpButton extends StatelessWidget {
-  const _SignUpButton({
-    Key? key,
-  }) : super(key: key);
+  const _SignUpButton();
 
   @override
   Widget build(BuildContext context) {
@@ -131,9 +127,7 @@ class _SignUpButton extends StatelessWidget {
 }
 
 class _ForgotPasswordButton extends StatelessWidget {
-  const _ForgotPasswordButton({
-    Key? key,
-  }) : super(key: key);
+  const _ForgotPasswordButton();
 
   @override
   Widget build(BuildContext context) {

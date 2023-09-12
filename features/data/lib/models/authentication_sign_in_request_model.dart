@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class AuthenticationSignInRequestModel extends Equatable {
-  final String username;
-  final String password;
-
   const AuthenticationSignInRequestModel({
     required this.username,
     required this.password,
   });
+
+  final String username;
+  final String password;
 
   @override
   List<Object?> get props => [
@@ -20,10 +20,9 @@ class AuthenticationSignInRequestModel extends Equatable {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    result.addAll({'username': username});
-    result.addAll({'password': password});
-
-    return result;
+    return result
+      ..addAll({'username': username})
+      ..addAll({'password': password});
   }
 
   String toJson() => json.encode(toMap());

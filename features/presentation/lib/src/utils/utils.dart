@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Utils {
-  static Future<bool> onWillPop(_, {required String title, required String content}) async {
+  static Future<bool> onWillPop(
+    _, {
+    required String title,
+    required String content,
+  }) async {
     return (await showDialog(
           context: _,
           builder: (context) => AlertDialog(

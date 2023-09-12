@@ -8,13 +8,13 @@ sealed class AuthenticationState extends Equatable {
 }
 
 final class Authenticated extends AuthenticationState {
-  final String authenticationToken;
-  final String refreshToken;
-
   const Authenticated({
     required this.authenticationToken,
     required this.refreshToken,
   });
+
+  final String authenticationToken;
+  final String refreshToken;
 
   @override
   List<Object> get props => [

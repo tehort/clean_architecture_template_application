@@ -5,5 +5,5 @@ import 'package:presentation/presentation.dart';
 
 void main() {
   configureDependencyInjection();
-  runApp(App());
+  runApp(const App());
 }

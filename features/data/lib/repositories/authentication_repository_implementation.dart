@@ -3,15 +3,23 @@ import 'package:domain/core/result.dart';
 import 'package:domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImplementation extends AuthenticationRepository {
+  AuthenticationRepositoryImplementation({
+    required this.authenticationRemoteDataSource,
+  });
+
   final AuthenticationRemoteDataSource authenticationRemoteDataSource;
 
-  AuthenticationRepositoryImplementation({required this.authenticationRemoteDataSource});
-
   @override
-  Future<Result<void, Exception>> signIn({required String username, required String password}) async {
+  Future<Result<void, Exception>> signIn({
+    required String username,
+    required String password,
+  }) async {
     try {
-      await authenticationRemoteDataSource.signIn(username: username, password: password);
-      return Success();
+      await authenticationRemoteDataSource.signIn(
+        username: username,
+        password: password,
+      );
+      return const Success();
     } on Exception catch (e) {
       return Failure(e);
     }

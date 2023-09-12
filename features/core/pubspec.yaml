@@ -7,14 +7,15 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  get_it: ^7.6.4
   data: 
     path: ../data
-  presentation:
-    path: ../presentation
   domain:
     path: ../domain
+  get_it: ^7.6.4
+  presentation:
+    path: ../presentation
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   test: ^1.21.0
+  very_good_analysis: ^5.1.0

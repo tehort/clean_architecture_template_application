@@ -12,7 +12,7 @@ class RestClientImplementation extends RestClient {
     Options? options,
   }) async {
     _dio.options.baseUrl = baseUrl;
-    return await _dio.get<T>(
+    return _dio.get<T>(
       path,
       queryParameters: queryParameters,
       options: options,
@@ -23,12 +23,12 @@ class RestClientImplementation extends RestClient {
   Future<Response<T>> post<T>({
     required String path,
     required String baseUrl,
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
     _dio.options.baseUrl = baseUrl;
-    return await _dio.post(
+    return _dio.post(
       path,
       data: data,
       queryParameters: queryParameters,
@@ -45,7 +45,7 @@ class RestClientImplementation extends RestClient {
     Options? options,
   }) async {
     _dio.options.baseUrl = baseUrl;
-    return await _dio.put<T>(
+    return _dio.put<T>(
       path,
       data: data,
       queryParameters: queryParameters,
@@ -62,7 +62,7 @@ class RestClientImplementation extends RestClient {
     Options? options,
   }) async {
     _dio.options.baseUrl = baseUrl;
-    return await _dio.delete<T>(
+    return _dio.delete<T>(
       path,
       data: data,
       queryParameters: queryParameters,

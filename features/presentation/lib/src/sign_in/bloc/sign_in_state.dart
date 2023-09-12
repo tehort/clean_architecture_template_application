@@ -1,10 +1,6 @@
 part of 'sign_in_bloc.dart';
 
 class SignInState extends Equatable {
-  final bool rememberMe;
-  final String username;
-  final String password;
-
   const SignInState({
     required this.rememberMe,
     required this.username,
@@ -15,6 +11,10 @@ class SignInState extends Equatable {
       : username = '',
         password = '',
         rememberMe = false;
+
+  final bool rememberMe;
+  final String username;
+  final String password;
 
   SignInState copyWith({
     bool? rememberMe,
@@ -38,14 +38,10 @@ class SignInState extends Equatable {
 
 final class SignInLoadingState extends SignInState {
   const SignInLoadingState({
-    required bool rememberMe,
-    required String username,
-    required String password,
-  }) : super(
-          rememberMe: rememberMe,
-          username: username,
-          password: password,
-        );
+    required super.rememberMe,
+    required super.username,
+    required super.password,
+  });
 
   @override
   List<Object> get props => [
@@ -56,18 +52,14 @@ final class SignInLoadingState extends SignInState {
 }
 
 final class SignInErrorState extends SignInState {
-  final String errorMessage;
-
   const SignInErrorState({
-    required rememberMe,
-    required username,
-    required password,
+    required super.rememberMe,
+    required super.username,
+    required super.password,
     required this.errorMessage,
-  }) : super(
-          rememberMe: rememberMe,
-          username: username,
-          password: password,
-        );
+  });
+
+  final String errorMessage;
 
   @override
   List<Object> get props => [

@@ -7,8 +7,8 @@ import 'package:presentation/src/utils/utils.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SignInPage extends StatelessWidget {
         ),
         child: BlocProvider(
           create: (context) => sl<SignInBloc>(),
-          child: SignInForm(),
+          child: const SignInForm(),
         ),
       ),
     );

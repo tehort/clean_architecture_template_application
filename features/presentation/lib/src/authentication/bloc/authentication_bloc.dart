@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
+// ignore: lines_longer_than_80_chars
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(const Unauthenticated()) {
     on<AppStarted>(_onAppStartedEvent);
@@ -11,11 +12,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<LoggedOut>(_onLoggedOutEvent);
   }
 
-  _onAppStartedEvent(AppStarted event, Emitter<AuthenticationState> emit) {
+  void _onAppStartedEvent(AppStarted event, Emitter<AuthenticationState> emit) {
     emit(const Unauthenticated());
   }
 
-  _onLoggedInEvent(LoggedIn event, Emitter<AuthenticationState> emit) {
+  void _onLoggedInEvent(LoggedIn event, Emitter<AuthenticationState> emit) {
     emit(
       Authenticated(
         authenticationToken: event.authenticationToken,
@@ -24,7 +25,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     );
   }
 
-  _onLoggedOutEvent(LoggedOut event, Emitter<AuthenticationState> emit) {
+  void _onLoggedOutEvent(LoggedOut event, Emitter<AuthenticationState> emit) {
     emit(const Unauthenticated());
   }
 }

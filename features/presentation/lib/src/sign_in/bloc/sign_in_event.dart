@@ -3,33 +3,33 @@ part of 'sign_in_bloc.dart';
 sealed class SignInEvent extends Equatable {}
 
 class UsernameChanged extends SignInEvent {
-  final String username;
-
   UsernameChanged({
     required this.username,
   });
+
+  final String username;
 
   @override
   List<Object?> get props => [username];
 }
 
 class PasswordChanged extends SignInEvent {
-  final String password;
-
   PasswordChanged({
     required this.password,
   });
+
+  final String password;
 
   @override
   List<Object?> get props => [password];
 }
 
 class RememberMeChanged extends SignInEvent {
-  final bool rememberMe;
-
   RememberMeChanged({
     required this.rememberMe,
   });
+
+  final bool rememberMe;
 
   @override
   List<Object?> get props => [rememberMe];

@@ -11,7 +11,7 @@ abstract class RestClient {
   Future<Response<T>> post<T>({
     required String path,
     required String baseUrl,
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
   });

@@ -25,7 +25,8 @@
 
 //     elevatedButtonTheme: ElevatedButtonThemeData(
 //       style: ElevatedButton.styleFrom(
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)
+// ),
 //         fixedSize: const Size(double.infinity, 40),
 //         onPrimary: Colors.white,
 //       ),

@@ -1,4 +1,5 @@
 import 'package:domain/core/result.dart';
+import 'package:domain/entities/authenticated_info.dart';
 import 'package:domain/repositories/authentication_repository.dart';
 
 class AuthenticationSignInUsecase {
@@ -8,7 +9,7 @@ class AuthenticationSignInUsecase {
 
   final AuthenticationRepository _authenticationRepository;
 
-  Future<Result<void, Exception>> call({
+  Future<Result<AuthenticatedInfo, Exception>> call({
     required String username,
     required String password,
   }) {

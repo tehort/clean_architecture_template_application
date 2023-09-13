@@ -1,3 +1,4 @@
+import 'package:domain/entities/authenticated_info.dart';
 import 'package:equatable/equatable.dart';
 
 class AuthenticationSignInResponseModel extends Equatable {
@@ -32,4 +33,14 @@ class AuthenticationSignInResponseModel extends Equatable {
         username,
         token,
       ];
+
+  AuthenticatedInfo toAuthenticatedInfo() {
+    return AuthenticatedInfo(
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      token: token,
+    );
+  }
 }

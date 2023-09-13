@@ -25,5 +25,7 @@ class AuthenticationSignInRequestModel extends Equatable {
       ..addAll({'password': password});
   }
 
-  String toJson() => json.encode(toMap());
+  String toJson() {
+    return json.encode(toMap());
+  }
 }

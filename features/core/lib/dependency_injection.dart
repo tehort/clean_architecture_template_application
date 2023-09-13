@@ -1,10 +1,16 @@
-import 'package:data/data_sources/core/rest_client.dart';
-import 'package:data/data_sources/core/rest_client_implementation.dart';
+import 'package:data/core/rest_client.dart';
+import 'package:data/core/rest_client_implementation.dart';
+import 'package:data/core/secure_local_storage_client.dart';
+import 'package:data/core/secure_local_storage_client_implementation.dart';
+import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source.dart';
+import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source_implementation.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source_implementation.dart';
 import 'package:data/repositories/authentication_repository_implementation.dart';
+import 'package:dio/dio.dart';
 import 'package:domain/repositories/authentication_repository.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/presentation.dart';
 
@@ -17,16 +23,33 @@ void configureDependencyInjection() {
   _setupPresentationDependencies();
 }
 
-void _setupOtherDependencies() {
-  sl.registerFactory<RestClient>(RestClientImplementation.new);
+Future<void> _setupOtherDependencies() async {
+  sl
+    ..registerFactory<Dio>(Dio.new)
+    ..registerFactory<RestClient>(
+      () => RestClientImplementation(
+        dio: sl<Dio>(),
+      ),
+    )
+    ..registerFactory<SecureLocalStorageClient>(
+      () => SecureLocalStorageClientImplementation(
+        storage: const FlutterSecureStorage(),
+      ),
+    );
 }
 
 void _setupDataDependencies() {
-  sl.registerFactory<AuthenticationRemoteDataSource>(
-    () => AuthenticationRemoteDataSourceImplementation(
-      apiClient: sl<RestClient>(),
-    ),
-  );
+  sl
+    ..registerFactory<AuthenticationRemoteDataSource>(
+      () => AuthenticationRemoteDataSourceImplementation(
+        apiClient: sl<RestClient>(),
+      ),
+    )
+    ..registerFactory<SecureLocalStorageDataSource>(
+      () => SecureLocalStorageDataSourceImplementation(
+        localStorageClient: sl<SecureLocalStorageClient>(),
+      ),
+    );
 }
 
 void _setupDomainDependencies() {
@@ -34,6 +57,7 @@ void _setupDomainDependencies() {
     ..registerFactory<AuthenticationRepository>(
       () => AuthenticationRepositoryImplementation(
         authenticationRemoteDataSource: sl<AuthenticationRemoteDataSource>(),
+        secureLocalStorageDataSource: sl<SecureLocalStorageDataSource>(),
       ),
     )
     ..registerFactory(
@@ -49,6 +73,7 @@ void _setupPresentationDependencies() {
     ..registerFactory(
       () => SignInBloc(
         authenticationSignInUsecase: sl<AuthenticationSignInUsecase>(),
+        authenticationBloc: sl<AuthenticationBloc>(),
       ),
     );
 }

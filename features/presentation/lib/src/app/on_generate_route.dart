@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/src/sign_in/widgets/sign_in_page.dart';
 import 'package:presentation/src/utils/pages_names_constants.dart';
+import 'package:presentation/src/widgets/no_page_found_widget.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
@@ -19,20 +20,4 @@ class OnGenerateRoute {
 
 dynamic routeBuilder(Widget child) {
   return MaterialPageRoute(builder: (context) => child);
-}
-
-class NoPageFound extends StatelessWidget {
-  const NoPageFound({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Page not found'),
-      ),
-      body: const Center(
-        child: Text('Page not found'),
-      ),
-    );
-  }
 }

@@ -16,20 +16,23 @@ final class AppStarted extends AuthenticationEvent {
 
 final class LoggedIn extends AuthenticationEvent {
   const LoggedIn({
-    required this.userId,
-    required this.authenticationToken,
-    required this.refreshToken,
+    // required this.userId,
+    // required this.authenticationToken,
+    // required this.refreshToken,
+    required this.authenticatedInfo,
   });
 
-  final String userId;
-  final String authenticationToken;
-  final String refreshToken;
+  final AuthenticatedInfo authenticatedInfo;
+  // final String userId;
+  // final String authenticationToken;
+  // final String refreshToken;
 
   @override
   List<Object> get props => [
-        userId,
-        authenticationToken,
-        refreshToken,
+        authenticatedInfo,
+        // userId,
+        // authenticationToken,
+        // refreshToken,
       ];
 }
 

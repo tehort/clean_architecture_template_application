@@ -9,15 +9,6 @@ environment:
 dependencies:
   core:
     path: features/core
-  flutter:
-    sdk: flutter
-  presentation:
-    path: features/presentation
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   very_good_analysis: ^5.1.0
-
-flutter:
-  uses-material-design: true

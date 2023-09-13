@@ -1,10 +1,9 @@
-import 'package:data/data_sources/core/rest_client.dart';
+import 'package:data/core/rest_client.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';
 import 'package:data/models/authentication_sign_in_request_model.dart';
 import 'package:data/models/authentication_sign_in_response_model.dart';
-import 'package:data/utils/api_constants.dart';
+import 'package:data/utils/rest_api_constants.dart';
 
-// ignore: lines_longer_than_80_chars
 class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemoteDataSource {
   AuthenticationRemoteDataSourceImplementation({
     required RestClient apiClient,
@@ -18,8 +17,8 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
     required String password,
   }) async {
     final response = await _apiClient.post<AuthenticationSignInResponseModel>(
-      baseUrl: ApiEndpointsConstants.baseUrl,
-      path: ApiEndpointsConstants.userSignIn,
+      baseUrl: RestApiEndpointsConstants.baseUrl,
+      path: RestApiEndpointsConstants.userSignIn,
       data: AuthenticationSignInRequestModel(
         username: username,
         password: password,

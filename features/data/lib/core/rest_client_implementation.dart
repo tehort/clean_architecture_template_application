@@ -1,8 +1,12 @@
-import 'package:data/data_sources/core/rest_client.dart';
+import 'package:data/core/rest_client.dart';
 import 'package:dio/dio.dart';
 
 class RestClientImplementation extends RestClient {
-  final Dio _dio = Dio();
+  RestClientImplementation({
+    required Dio dio,
+  }) : _dio = dio;
+
+  final Dio _dio;
 
   @override
   Future<Response<T>> get<T>({

@@ -9,6 +9,10 @@ environment:
 dependencies:
   core:
     path: features/core
-
+  flutter:
+    sdk: flutter
+    
 dev_dependencies:
   very_good_analysis: ^5.1.0
+  flutter_test:
+    sdk: flutter

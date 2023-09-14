@@ -1,7 +1,7 @@
+import 'package:core/data_source_clients/rest_client_implementation.dart';
+import 'package:core/data_source_clients/secure_local_storage_client_implementation.dart';
 import 'package:data/core/rest_client.dart';
-import 'package:data/core/rest_client_implementation.dart';
 import 'package:data/core/secure_local_storage_client.dart';
-import 'package:data/core/secure_local_storage_client_implementation.dart';
 import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source.dart';
 import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source_implementation.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';

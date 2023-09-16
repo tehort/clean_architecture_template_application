@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:domain/entities/authenticated_info.dart';
 import 'package:equatable/equatable.dart';
 
 part 'authentication_event.dart';
@@ -19,11 +18,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   void _onLoggedInEvent(LoggedIn event, Emitter<AuthenticationState> emit) {
     emit(
-      Authenticated(
-        authenticatedInfo: event.authenticatedInfo,
-        // authenticationToken: event.authenticatToken,
-        // refreshToken: event.refreshToken,
-      ),
+      const Authenticated(
+          // authenticatedInfo: event.authenticatedInfo,
+          // authenticationToken: event.authenticatToken,
+          // refreshToken: event.refreshToken,
+          ),
     );
   }
 

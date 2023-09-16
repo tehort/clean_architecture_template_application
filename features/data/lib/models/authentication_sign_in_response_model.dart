@@ -34,8 +34,8 @@ class AuthenticationSignInResponseModel extends Equatable {
         token,
       ];
 
-  AuthenticatedInfo toAuthenticatedInfo() {
-    return AuthenticatedInfo(
+  AuthenticationInfo toAuthenticatedInfo() {
+    return AuthenticationInfo(
       id: id,
       firstName: firstName,
       lastName: lastName,

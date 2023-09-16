@@ -10,8 +10,23 @@ class SecureLocalStorageDataSourceImplementation implements SecureLocalStorageDa
   final SecureLocalStorageClient _localSecureStorageClient;
 
   @override
-  Future<String?> getAuthenticationToken() async {
+  Future<String?> getToken() {
     return _localSecureStorageClient.read(
+      key: LocalStorageConstants.authenticationTokenKey,
+    );
+  }
+
+  @override
+  Future<void> writeToken(String token) {
+    return _localSecureStorageClient.write(
+      key: LocalStorageConstants.authenticationTokenKey,
+      value: token,
+    );
+  }
+
+  @override
+  Future<void> deleteToken() async {
+    return _localSecureStorageClient.delete(
       key: LocalStorageConstants.authenticationTokenKey,
     );
   }

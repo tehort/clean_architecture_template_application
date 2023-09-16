@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:domain/core/result.dart';
-import 'package:domain/entities/authenticated_info.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:presentation/presentation.dart';
@@ -65,9 +64,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       password: state.password,
     );
     switch (result) {
-      case Success<AuthenticatedInfo, Exception>(value: final info):
-        _authenticationBloc.add(LoggedIn(authenticatedInfo: info));
-      case Failure<AuthenticatedInfo, Exception>(exception: final exception):
+      case Success<void, Exception>(value: _):
+        _authenticationBloc.add(LoggedIn());
+      case Failure<void, Exception>(exception: final exception):
         emit(
           SignInErrorState(
             rememberMe: state.rememberMe,

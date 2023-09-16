@@ -7,8 +7,10 @@ import 'package:data/data_sources/local_data_sources/secure_local_storage_data_s
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source_implementation.dart';
 import 'package:data/repositories/authentication_repository_implementation.dart';
+import 'package:data/repositories/preferences_repository_implementation.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/repositories/authentication_repository.dart';
+import 'package:domain/repositories/preferences_repository.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -54,15 +56,21 @@ void _setupDataDependencies() {
 
 void _setupDomainDependencies() {
   sl
+    ..registerFactory<PreferencesRepository>(
+      () => PreferencesRepositoryImplementation(
+        secureLocalStorageDataSource: sl<SecureLocalStorageDataSource>(),
+      ),
+    )
     ..registerFactory<AuthenticationRepository>(
       () => AuthenticationRepositoryImplementation(
         authenticationRemoteDataSource: sl<AuthenticationRemoteDataSource>(),
-        secureLocalStorageDataSource: sl<SecureLocalStorageDataSource>(),
+        preferencesRepository: sl<PreferencesRepository>(),
       ),
     )
     ..registerFactory(
       () => AuthenticationSignInUsecase(
         authenticationRepository: sl<AuthenticationRepository>(),
+        preferencesRepository: sl<PreferencesRepository>(),
       ),
     );
 }

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class AuthenticatedInfo extends Equatable {
-  const AuthenticatedInfo({
+class AuthenticationInfo extends Equatable {
+  const AuthenticationInfo({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -11,8 +11,8 @@ class AuthenticatedInfo extends Equatable {
     required this.token,
   });
 
-  factory AuthenticatedInfo.fromMap(Map<String, dynamic> map) {
-    return AuthenticatedInfo(
+  factory AuthenticationInfo.fromMap(Map<String, dynamic> map) {
+    return AuthenticationInfo(
       id: map['id'] ?? 0,
       firstName: map['firstName'] ?? '',
       lastName: map['lastName'] ?? '',
@@ -21,8 +21,8 @@ class AuthenticatedInfo extends Equatable {
     );
   }
 
-  factory AuthenticatedInfo.fromJson(String source) {
-    return AuthenticatedInfo.fromMap(json.decode(source));
+  factory AuthenticationInfo.fromJson(String source) {
+    return AuthenticationInfo.fromMap(json.decode(source));
   }
 
   final num id;

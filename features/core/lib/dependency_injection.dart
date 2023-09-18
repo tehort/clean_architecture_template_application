@@ -12,6 +12,7 @@ import 'package:dio/dio.dart';
 import 'package:domain/repositories/authentication_repository.dart';
 import 'package:domain/repositories/preferences_repository.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
+import 'package:domain/usecases/authentication_sign_up_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/presentation.dart';
@@ -72,6 +73,11 @@ void _setupDomainDependencies() {
         authenticationRepository: sl<AuthenticationRepository>(),
         preferencesRepository: sl<PreferencesRepository>(),
       ),
+    )
+    ..registerFactory(
+      () => AuthenticationSignUpUsecase(
+        authenticationRepository: sl<AuthenticationRepository>(),
+      ),
     );
 }
 
@@ -82,6 +88,11 @@ void _setupPresentationDependencies() {
       () => SignInBloc(
         authenticationSignInUsecase: sl<AuthenticationSignInUsecase>(),
         authenticationBloc: sl<AuthenticationBloc>(),
+      ),
+    )
+    ..registerFactory(
+      () => SignUpBloc(
+        authenticationSignUpUsecase: sl<AuthenticationSignUpUsecase>(),
       ),
     );
 }

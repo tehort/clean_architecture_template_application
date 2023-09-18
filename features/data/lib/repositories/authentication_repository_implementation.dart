@@ -26,4 +26,26 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
     );
     return result.token;
   }
+
+  @override
+  Future<String> signUp({
+    required String title,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required bool acceptTerms,
+  }) async {
+    final result = await _authenticationRemoteDataSource.signUp(
+      title: title,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+      acceptTerms: acceptTerms,
+    );
+    return result.message;
+  }
 }

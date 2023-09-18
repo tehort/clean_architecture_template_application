@@ -63,6 +63,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       username: state.username,
       password: state.password,
     );
+
     switch (result) {
       case Success<void, Exception>(value: _):
         _authenticationBloc.add(LoggedIn());

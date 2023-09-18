@@ -13,6 +13,10 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sign Up'),
+        centerTitle: true,
+      ),
       body: WillPopScope(
         onWillPop: () => Utils.onWillPop(
           context,

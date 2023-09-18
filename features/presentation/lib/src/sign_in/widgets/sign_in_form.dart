@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/sign_in/bloc/sign_in_bloc.dart';
+import 'package:presentation/src/utils/pages_names_constants.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
 class SignInForm extends StatelessWidget {
@@ -126,9 +127,9 @@ class _SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextButton(
-      onPressed: null,
-      child: Text(
+    return TextButton(
+      onPressed: () => Navigator.pushNamed(context, PagesNamesConstants.signUpPage),
+      child: const Text(
         'Sign up',
       ),
     );

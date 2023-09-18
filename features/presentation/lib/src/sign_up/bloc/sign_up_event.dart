@@ -2,8 +2,8 @@ part of 'sign_up_bloc.dart';
 
 sealed class SignUpEvent extends Equatable {}
 
-class UsernameChanged extends SignUpEvent {
-  UsernameChanged({
+class SignUpUsernameChangedEvent extends SignUpEvent {
+  SignUpUsernameChangedEvent({
     required this.username,
   });
 
@@ -13,8 +13,8 @@ class UsernameChanged extends SignUpEvent {
   List<Object?> get props => [username];
 }
 
-class TitleChanged extends SignUpEvent {
-  TitleChanged({
+class SignUpTitleChangedEvent extends SignUpEvent {
+  SignUpTitleChangedEvent({
     required this.title,
   });
 
@@ -24,8 +24,8 @@ class TitleChanged extends SignUpEvent {
   List<Object?> get props => [title];
 }
 
-class FirstNameChanged extends SignUpEvent {
-  FirstNameChanged({
+class SignUpFirstNameChangedEvent extends SignUpEvent {
+  SignUpFirstNameChangedEvent({
     required this.firstName,
   });
 
@@ -35,8 +35,8 @@ class FirstNameChanged extends SignUpEvent {
   List<Object?> get props => [firstName];
 }
 
-class LastNameChanged extends SignUpEvent {
-  LastNameChanged({
+class SignUpLastNameChangedEvent extends SignUpEvent {
+  SignUpLastNameChangedEvent({
     required this.lastName,
   });
 
@@ -46,8 +46,8 @@ class LastNameChanged extends SignUpEvent {
   List<Object?> get props => [lastName];
 }
 
-class EmailChanged extends SignUpEvent {
-  EmailChanged({
+class SignUpEmailChangedEvent extends SignUpEvent {
+  SignUpEmailChangedEvent({
     required this.email,
   });
 
@@ -57,8 +57,8 @@ class EmailChanged extends SignUpEvent {
   List<Object?> get props => [email];
 }
 
-class RoleChanged extends SignUpEvent {
-  RoleChanged({
+class SignUpRoleChangedEvent extends SignUpEvent {
+  SignUpRoleChangedEvent({
     required this.role,
   });
 
@@ -68,8 +68,8 @@ class RoleChanged extends SignUpEvent {
   List<Object?> get props => [role];
 }
 
-class CreatedDateChanged extends SignUpEvent {
-  CreatedDateChanged({
+class SignUpCreatedDateChangedEvent extends SignUpEvent {
+  SignUpCreatedDateChangedEvent({
     required this.createdDate,
   });
 
@@ -79,8 +79,8 @@ class CreatedDateChanged extends SignUpEvent {
   List<Object?> get props => [createdDate];
 }
 
-class UpdatedDateChanged extends SignUpEvent {
-  UpdatedDateChanged({
+class SignUpUpdatedDateChangedEvent extends SignUpEvent {
+  SignUpUpdatedDateChangedEvent({
     required this.updatedDate,
   });
 
@@ -90,8 +90,8 @@ class UpdatedDateChanged extends SignUpEvent {
   List<Object?> get props => [updatedDate];
 }
 
-class AgreeChanged extends SignUpEvent {
-  AgreeChanged({
+class SignUpAgreeChangedEvent extends SignUpEvent {
+  SignUpAgreeChangedEvent({
     required this.isChecked,
   });
 
@@ -101,8 +101,8 @@ class AgreeChanged extends SignUpEvent {
   List<Object?> get props => [isChecked];
 }
 
-class PasswordChanged extends SignUpEvent {
-  PasswordChanged({
+class SignUpPasswordChangedEvent extends SignUpEvent {
+  SignUpPasswordChangedEvent({
     required this.password,
   });
 
@@ -112,8 +112,8 @@ class PasswordChanged extends SignUpEvent {
   List<Object?> get props => [password];
 }
 
-class ConfirmPasswordChanged extends SignUpEvent {
-  ConfirmPasswordChanged({
+class SignUpConfirmPasswordChangedEvent extends SignUpEvent {
+  SignUpConfirmPasswordChangedEvent({
     required this.confirmPassword,
   });
 
@@ -121,4 +121,22 @@ class ConfirmPasswordChanged extends SignUpEvent {
 
   @override
   List<Object?> get props => [confirmPassword];
+}
+
+class SignUpAcceptTermsChangedEvent extends SignUpEvent {
+  SignUpAcceptTermsChangedEvent({
+    required this.acceptTerms,
+  });
+
+  final bool acceptTerms;
+
+  @override
+  List<Object?> get props => [acceptTerms];
+}
+
+class SignUpButtonPressedEvent extends SignUpEvent {
+  SignUpButtonPressedEvent();
+
+  @override
+  List<Object?> get props => [];
 }

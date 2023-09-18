@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/sign_up/bloc/sign_up_bloc.dart';
+import 'package:presentation/src/utils/utils.dart';
+import 'package:presentation/src/widgets/checkbox_formfield.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
-class SignUpForm extends StatelessWidget {
+class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
+
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
       listener: (context, state) {
-        // if (state is SignUpErrorState) {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(
-        //       content: Text(state.errorMessage),
-        //     ),
-        //   );
-        // }
+        if (state is SignUpErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+            ),
+          );
+        } else if (state is SignUpShowSnackbarState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+            ),
+          );
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
         return Stack(
@@ -24,24 +40,28 @@ class SignUpForm extends StatelessWidget {
             Positioned.fill(
               child: Align(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(38, 0, 38, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const _SignUpInformation(),
-                      _TitleInputField(),
-                      _FirstNameInputField(),
-                      _LastNameInputField(),
-                      _EmailInputField(),
-                      _PasswordInputField(),
-                      _ConfirmPasswordInput(),
-                      const _SignUpButton(),
-                    ],
+                  padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const _SignUpInformation(),
+                        _TitleInputField(),
+                        _FirstNameInputField(),
+                        _LastNameInputField(),
+                        _EmailInputField(),
+                        _PasswordInputField(),
+                        _ConfirmPasswordInput(),
+                        _AcceptTermsCheckBox(),
+                        _SignUpButton(formKey: _formKey),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            // if (state is SignUpLoadingState) const ProgressHud(),
+            if (state is SignUpLoadingState) const ProgressHud(),
           ],
         );
       },
@@ -55,12 +75,12 @@ class _SignUpInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Sign up on App', style: Theme.of(context).textTheme.headline6),
-          Text('Create a free account on App and get started', style: Theme.of(context).textTheme.bodyText1),
+          Text('Sign up on App', style: Theme.of(context).textTheme.titleLarge),
+          Text('Create a free account on App and get started', style: Theme.of(context).textTheme.bodyLarge),
         ],
       ),
     );
@@ -70,15 +90,20 @@ class _SignUpInformation extends StatelessWidget {
 class _TitleInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_title_textField'),
-      decoration: const InputDecoration(
-        labelText: 'Title',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_title_textField'),
+        decoration: const InputDecoration(
+          labelText: 'Title',
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.text,
+        validator: validateField,
+        onChanged: (title) {
+          context.read<SignUpBloc>().add(SignUpTitleChangedEvent(title: title));
+        },
       ),
-      keyboardType: TextInputType.text,
-      onChanged: (title) {
-        context.read<SignUpBloc>().add(TitleChanged(title: title));
-      },
     );
   }
 }
@@ -86,15 +111,20 @@ class _TitleInputField extends StatelessWidget {
 class _FirstNameInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_first_name_textField'),
-      decoration: const InputDecoration(
-        labelText: 'First Name',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_first_name_textField'),
+        decoration: const InputDecoration(
+          labelText: 'First Name',
+          border: OutlineInputBorder(),
+        ),
+        validator: validateField,
+        keyboardType: TextInputType.text,
+        onChanged: (firstName) {
+          context.read<SignUpBloc>().add(SignUpFirstNameChangedEvent(firstName: firstName));
+        },
       ),
-      keyboardType: TextInputType.text,
-      onChanged: (firstName) {
-        context.read<SignUpBloc>().add(FirstNameChanged(firstName: firstName));
-      },
     );
   }
 }
@@ -102,15 +132,20 @@ class _FirstNameInputField extends StatelessWidget {
 class _LastNameInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_last_name_textField'),
-      decoration: const InputDecoration(
-        labelText: 'Last Name',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_last_name_textField'),
+        decoration: const InputDecoration(
+          labelText: 'Last Name',
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.text,
+        validator: validateField,
+        onChanged: (lastName) {
+          context.read<SignUpBloc>().add(SignUpLastNameChangedEvent(lastName: lastName));
+        },
       ),
-      keyboardType: TextInputType.text,
-      onChanged: (lastName) {
-        context.read<SignUpBloc>().add(LastNameChanged(lastName: lastName));
-      },
     );
   }
 }
@@ -118,15 +153,20 @@ class _LastNameInputField extends StatelessWidget {
 class _EmailInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_email_textField'),
-      decoration: const InputDecoration(
-        labelText: 'E-mail',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_email_textField'),
+        decoration: const InputDecoration(
+          labelText: 'E-mail',
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.emailAddress,
+        validator: validateEmail,
+        onChanged: (email) {
+          context.read<SignUpBloc>().add(SignUpEmailChangedEvent(email: email));
+        },
       ),
-      keyboardType: TextInputType.emailAddress,
-      onChanged: (email) {
-        context.read<SignUpBloc>().add(EmailChanged(email: email));
-      },
     );
   }
 }
@@ -134,15 +174,21 @@ class _EmailInputField extends StatelessWidget {
 class _PasswordInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_password_textField'),
-      decoration: const InputDecoration(
-        labelText: 'Password',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_password_textField'),
+        decoration: const InputDecoration(
+          labelText: 'Password',
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.text,
+        obscureText: true,
+        validator: validatePassword,
+        onChanged: (password) {
+          context.read<SignUpBloc>().add(SignUpPasswordChangedEvent(password: password));
+        },
       ),
-      keyboardType: TextInputType.text,
-      onChanged: (password) {
-        context.read<SignUpBloc>().add(PasswordChanged(password: password));
-      },
     );
   }
 }
@@ -150,30 +196,63 @@ class _PasswordInputField extends StatelessWidget {
 class _ConfirmPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('sign_up_form_confirm_password_textField'),
-      decoration: const InputDecoration(
-        labelText: 'Confirm Password',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('sign_up_form_confirm_password_textField'),
+        decoration: const InputDecoration(
+          labelText: 'Confirm Password',
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.text,
+        onChanged: (confirmPassword) {
+          context.read<SignUpBloc>().add(SignUpConfirmPasswordChangedEvent(confirmPassword: confirmPassword));
+        },
       ),
-      keyboardType: TextInputType.text,
-      onChanged: (confirmPassword) {
-        context.read<SignUpBloc>().add(ConfirmPasswordChanged(confirmPassword: confirmPassword));
+    );
+  }
+}
+
+class _AcceptTermsCheckBox extends StatefulWidget {
+  @override
+  State<_AcceptTermsCheckBox> createState() => _AcceptTermsCheckBoxState();
+}
+
+class _AcceptTermsCheckBoxState extends State<_AcceptTermsCheckBox> {
+  @override
+  Widget build(BuildContext context) {
+    return CheckBoxFormField(
+      isChecked: context.read<SignUpBloc>().state.acceptTerms,
+      label: const Text('I accept the terms'),
+      validator: validateCheckbox,
+      onChanged: (bool? value) {
+        context.read<SignUpBloc>().add(SignUpAcceptTermsChangedEvent(acceptTerms: value ?? false));
       },
     );
   }
 }
 
 class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
+  const _SignUpButton({
+    required formKey,
+  }) : _formKey = formKey;
+
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: const Key('sign_up_form_sign_up_button'),
-      style: ElevatedButton.styleFrom(),
-      // onPressed: context.read<SignUpBloc>().signUp,
-      onPressed: null,
-      child: const Text('SIGN UP'),
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ElevatedButton(
+        key: const Key('sign_up_form_sign_up_button'),
+        style: ElevatedButton.styleFrom(),
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            context.read<SignUpBloc>().add(SignUpButtonPressedEvent());
+          }
+        },
+        child: const Text('SIGN UP'),
+      ),
     );
   }
 }

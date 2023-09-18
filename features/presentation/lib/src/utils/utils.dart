@@ -76,7 +76,6 @@ String? validateConfirmPassword(String? password, String? confirmPassword) {
   return null;
 }
 
-// ignore: avoid_positional_boolean_parameters
 String? validateCheckbox(bool? checkboxValue) {
   if (checkboxValue != true) {
     return 'You need to accept terms';

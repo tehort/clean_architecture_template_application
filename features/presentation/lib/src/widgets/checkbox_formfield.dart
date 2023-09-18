@@ -50,15 +50,10 @@ class CheckBoxFormField extends FormField<bool> {
   final void Function(bool?) onChanged;
 
   @override
-  _CheckBoxFormFieldState createState() => _CheckBoxFormFieldState();
+  CheckBoxFormFieldState createState() => CheckBoxFormFieldState();
 }
 
-class _CheckBoxFormFieldState extends FormFieldState<bool> {
+class CheckBoxFormFieldState extends FormFieldState<bool> {
   @override
   CheckBoxFormField get widget => super.widget as CheckBoxFormField;
-
-  @override
-  void didChange(bool? value) {
-    super.didChange(value);
-  }
 }

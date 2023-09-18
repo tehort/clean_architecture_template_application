@@ -9,4 +9,5 @@ linter:
     public_member_api_docs: false
     avoid_dynamic_calls: false
     one_member_abstracts: false
-    lines_longer_than_80_chars: false``
+    lines_longer_than_80_chars: false
+    avoid_positional_boolean_parameters: false

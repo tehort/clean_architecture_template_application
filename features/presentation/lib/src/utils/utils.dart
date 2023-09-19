@@ -83,3 +83,11 @@ String? validateCheckbox(bool? checkboxValue) {
 
   return null;
 }
+
+String? validateToken(String? token) {
+  if (token == null || token.isEmpty) {
+    return 'This field cannot be empty';
+  }
+
+  return null;
+}

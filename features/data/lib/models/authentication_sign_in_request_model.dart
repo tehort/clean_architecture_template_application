@@ -4,16 +4,16 @@ import 'package:equatable/equatable.dart';
 
 class AuthenticationSignInRequestModel extends Equatable {
   const AuthenticationSignInRequestModel({
-    required this.username,
+    required this.email,
     required this.password,
   });
 
-  final String username;
+  final String email;
   final String password;
 
   @override
   List<Object?> get props => [
-        username,
+        email,
         password,
       ];
 
@@ -21,7 +21,7 @@ class AuthenticationSignInRequestModel extends Equatable {
     final result = <String, dynamic>{};
 
     return result
-      ..addAll({'username': username})
+      ..addAll({'email': email})
       ..addAll({'password': password});
   }
 

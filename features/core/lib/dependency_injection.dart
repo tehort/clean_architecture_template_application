@@ -1,7 +1,7 @@
-import 'package:core/data_source_clients/rest_client_implementation.dart';
-import 'package:core/data_source_clients/secure_local_storage_client_implementation.dart';
-import 'package:data/core/rest_client.dart';
-import 'package:data/core/secure_local_storage_client.dart';
+import 'package:core/data_source_adapters/rest_adapter_implementation.dart';
+import 'package:core/data_source_adapters/secure_local_storage_adapter_implementation.dart';
+import 'package:data/core/rest_adapter.dart';
+import 'package:data/core/secure_local_storage_adapter.dart';
 import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source.dart';
 import 'package:data/data_sources/local_data_sources/secure_local_storage_data_source_implementation.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';
@@ -29,13 +29,13 @@ void configureDependencyInjection() {
 Future<void> _setupOtherDependencies() async {
   sl
     ..registerFactory<Dio>(Dio.new)
-    ..registerFactory<RestClient>(
-      () => RestClientImplementation(
+    ..registerFactory<RestAdapter>(
+      () => RestAdapterImplementation(
         dio: sl<Dio>(),
       ),
     )
-    ..registerFactory<SecureLocalStorageClient>(
-      () => SecureLocalStorageClientImplementation(
+    ..registerFactory<SecureLocalStorageAdapter>(
+      () => SecureLocalStorageAdapterImplementation(
         storage: const FlutterSecureStorage(),
       ),
     );
@@ -45,12 +45,12 @@ void _setupDataDependencies() {
   sl
     ..registerFactory<AuthenticationRemoteDataSource>(
       () => AuthenticationRemoteDataSourceImplementation(
-        apiClient: sl<RestClient>(),
+        apiClient: sl<RestAdapter>(),
       ),
     )
     ..registerFactory<SecureLocalStorageDataSource>(
       () => SecureLocalStorageDataSourceImplementation(
-        localStorageClient: sl<SecureLocalStorageClient>(),
+        localStorageClient: sl<SecureLocalStorageAdapter>(),
       ),
     );
 }

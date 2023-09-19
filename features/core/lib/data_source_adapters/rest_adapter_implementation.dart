@@ -1,8 +1,8 @@
-import 'package:data/core/rest_client.dart';
+import 'package:data/core/rest_adapter.dart';
 import 'package:dio/dio.dart';
 
-class RestClientImplementation extends RestClient {
-  RestClientImplementation({
+class RestAdapterImplementation extends RestAdapter {
+  RestAdapterImplementation({
     required Dio dio,
   }) : _dio = dio;
 

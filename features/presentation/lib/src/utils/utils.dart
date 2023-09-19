@@ -50,7 +50,7 @@ String? validateEmail(String? formEmail) {
 
 String? validatePassword(String? password) {
   if (password == null || password.isEmpty) {
-    return 'Password cannot be empty!';
+    return 'Password cannot be empty';
   }
 
   if (password.length < 6) {
@@ -78,7 +78,7 @@ String? validateConfirmPassword(String? password, String? confirmPassword) {
 
 String? validateCheckbox(bool? checkboxValue) {
   if (checkboxValue != true) {
-    return 'You need to accept terms';
+    return 'You need to accept the terms';
   }
 
   return null;

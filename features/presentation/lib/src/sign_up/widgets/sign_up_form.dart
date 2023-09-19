@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/sign_up/bloc/sign_up_bloc.dart';
 import 'package:presentation/src/utils/utils.dart';
-import 'package:presentation/src/widgets/checkbox_formfield.dart';
+import 'package:presentation/src/widgets/checkbox_form_field.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
 class SignUpForm extends StatefulWidget {

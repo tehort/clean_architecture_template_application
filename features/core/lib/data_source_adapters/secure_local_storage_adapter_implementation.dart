@@ -1,8 +1,8 @@
-import 'package:data/core/secure_local_storage_client.dart';
+import 'package:data/core/secure_local_storage_adapter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SecureLocalStorageClientImplementation implements SecureLocalStorageClient {
-  SecureLocalStorageClientImplementation({
+class SecureLocalStorageAdapterImplementation implements SecureLocalStorageAdapter {
+  SecureLocalStorageAdapterImplementation({
     required FlutterSecureStorage storage,
   }) : _storage = storage;
 

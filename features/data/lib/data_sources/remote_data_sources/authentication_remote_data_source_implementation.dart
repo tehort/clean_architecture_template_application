@@ -1,4 +1,4 @@
-import 'package:data/core/rest_client.dart';
+import 'package:data/core/rest_adapter.dart';
 import 'package:data/data_sources/remote_data_sources/authentication_remote_data_source.dart';
 import 'package:data/models/authentication_sign_in_request_model.dart';
 import 'package:data/models/authentication_sign_in_response_model.dart';
@@ -8,10 +8,10 @@ import 'package:data/utils/rest_api_constants.dart';
 
 class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemoteDataSource {
   AuthenticationRemoteDataSourceImplementation({
-    required RestClient apiClient,
+    required RestAdapter apiClient,
   }) : _apiClient = apiClient;
 
-  final RestClient _apiClient;
+  final RestAdapter _apiClient;
 
   @override
   Future<AuthenticationSignInResponseModel> signIn({
@@ -22,7 +22,7 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
       baseUrl: RestApiEndpointsConstants.baseUrl,
       path: RestApiEndpointsConstants.userSignIn,
       data: AuthenticationSignInRequestModel(
-        username: username,
+        email: username,
         password: password,
       ).toJson(),
     );

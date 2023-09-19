@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class RestClient {
+abstract class RestAdapter {
   Future<Response<T>> get<T>({
     required String path,
     required String baseUrl,

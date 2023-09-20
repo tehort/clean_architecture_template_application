@@ -16,39 +16,39 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   })  : _authenticationSignInUsecase = authenticationSignInUsecase,
         _authenticationBloc = authenticationBloc,
         super(const SignInState.initial()) {
-    on<UsernameChanged>(_onUsernameChanged);
-    on<PasswordChanged>(_onPasswordChanged);
-    on<RememberMeChanged>(_onRememberMeChanged);
-    on<SignInButtonPressed>(_onSignInButtonPressed);
-    on<SignUpButtonPressed>(_onSignUpButtonPressed);
+    on<SignInUsernameChangedEvent>(_onSignInUsernameChanged);
+    on<SignInPasswordChangedEvent>(_onSignInPasswordChanged);
+    on<SignInRememberMeChangedEvent>(_onSignInRememberMeChanged);
+    on<SignInSignInButtonPressedEvent>(_onSignInSignInButtonPressed);
+    on<SignInSignUpButtonPressedEvent>(_onSignInSignUpButtonPressed);
   }
 
   final AuthenticationSignInUsecase _authenticationSignInUsecase;
   final AuthenticationBloc _authenticationBloc;
 
-  Future<void> _onUsernameChanged(
-    UsernameChanged event,
+  Future<void> _onSignInUsernameChanged(
+    SignInUsernameChangedEvent event,
     Emitter<SignInState> emit,
   ) async {
     emit(state.copyWith(username: event.username));
   }
 
-  Future<void> _onPasswordChanged(
-    PasswordChanged event,
+  Future<void> _onSignInPasswordChanged(
+    SignInPasswordChangedEvent event,
     Emitter<SignInState> emit,
   ) async {
     emit(state.copyWith(password: event.password));
   }
 
-  Future<void> _onRememberMeChanged(
-    RememberMeChanged event,
+  Future<void> _onSignInRememberMeChanged(
+    SignInRememberMeChangedEvent event,
     Emitter<SignInState> emit,
   ) async {
     emit(state.copyWith(rememberMe: event.rememberMe));
   }
 
-  Future<void> _onSignInButtonPressed(
-    SignInButtonPressed event,
+  Future<void> _onSignInSignInButtonPressed(
+    SignInSignInButtonPressedEvent event,
     Emitter<SignInState> emit,
   ) async {
     emit(
@@ -79,8 +79,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
   }
 
-  Future<void> _onSignUpButtonPressed(
-    SignUpButtonPressed event,
+  Future<void> _onSignInSignUpButtonPressed(
+    SignInSignUpButtonPressedEvent event,
     Emitter<SignInState> emit,
   ) async {
     emit(

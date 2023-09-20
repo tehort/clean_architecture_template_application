@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/presentation/app/dependency_injection.dart';
-import 'package:presentation/src/presentation/authentication/verify_email_dialog/bloc/bloc/verify_email_dialog_bloc.dart';
+import 'package:presentation/src/presentation/authentication/verify_email/bloc/bloc/verify_email_bloc.dart';
 import 'package:presentation/src/utils/utils.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
@@ -20,16 +20,16 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<VerifyEmailDialogBloc>(),
-      child: BlocConsumer<VerifyEmailDialogBloc, VerifyEmailDialogState>(
+      create: (context) => sl<VerifyEmailBloc>(),
+      child: BlocConsumer<VerifyEmailBloc, VerifyEmailState>(
         listener: (context, state) {
-          if (state is VerifyEmailDialogErrorState) {
+          if (state is VerifyEmailErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.errorMessage),
               ),
             );
-          } else if (state is VerifyEmailDialogSuccessState) {
+          } else if (state is VerifyEmailSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Email validated successfully'),
@@ -60,8 +60,8 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
                             enabled: true,
                             validator: validateToken,
                             onChanged: (value) {
-                              context.read<VerifyEmailDialogBloc>().add(
-                                    VerifyEmailDialogTokenChangedEvent(token: value),
+                              context.read<VerifyEmailBloc>().add(
+                                    VerifyEmailTokenChangedEvent(token: value),
                                   );
                             },
                           ),
@@ -69,7 +69,7 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
                       ],
                     ),
                   ),
-                  if (state is VerifyEmailDialogLoadingState) const ProgressHud(),
+                  if (state is VerifyEmailLoadingState) const ProgressHud(),
                 ],
               ),
             ),
@@ -78,8 +78,8 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
                 child: const Text('Validate'),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    context.read<VerifyEmailDialogBloc>().add(
-                          VerifyEmailDialogButtonPressedEvent(),
+                    context.read<VerifyEmailBloc>().add(
+                          VerifyEmailButtonPressedEvent(),
                         );
                   }
                 },

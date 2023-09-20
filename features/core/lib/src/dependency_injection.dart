@@ -19,7 +19,7 @@ import 'package:get_it/get_it.dart';
 import 'package:presentation/src/presentation/authentication/authentication/bloc/authentication_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_in/bloc/sign_in_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_up/bloc/sign_up_bloc.dart';
-import 'package:presentation/src/presentation/authentication/verify_email_dialog/bloc/bloc/verify_email_dialog_bloc.dart';
+import 'package:presentation/src/presentation/authentication/verify_email/bloc/bloc/verify_email_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -105,7 +105,7 @@ void _setupPresentationDependencies() {
       ),
     )
     ..registerFactory(
-      () => VerifyEmailDialogBloc(
+      () => VerifyEmailBloc(
         authenticationVerifyEmailUsecase: sl<AuthenticationVerifyEmailUsecase>(),
       ),
     );

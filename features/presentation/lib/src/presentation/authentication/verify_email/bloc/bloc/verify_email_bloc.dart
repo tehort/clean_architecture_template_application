@@ -4,33 +4,33 @@ import 'package:domain/src/usecases/authentication_verify_email_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-part 'verify_email_dialog_event.dart';
-part 'verify_email_dialog_state.dart';
+part 'verify_email_event.dart';
+part 'verify_email_state.dart';
 
-class VerifyEmailDialogBloc extends Bloc<VerifyEmailDialogEvent, VerifyEmailDialogState> {
-  VerifyEmailDialogBloc({
+class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
+  VerifyEmailBloc({
     required authenticationVerifyEmailUsecase,
   })  : _authenticationVerifyEmailUsecase = authenticationVerifyEmailUsecase,
-        super(const VerifyEmailDialogState.initial()) {
-    on<VerifyEmailDialogTokenChangedEvent>(_onVerifyEmailDialogTokenChangedEvent);
-    on<VerifyEmailDialogButtonPressedEvent>(_onVerifyEmailDialogButtonPressedEvent);
+        super(const VerifyEmailState.initial()) {
+    on<VerifyEmailTokenChangedEvent>(_onVerifyEmailTokenChangedEvent);
+    on<VerifyEmailButtonPressedEvent>(_onVerifyEmailButtonPressedEvent);
   }
 
   final AuthenticationVerifyEmailUsecase _authenticationVerifyEmailUsecase;
 
-  void _onVerifyEmailDialogTokenChangedEvent(
-    VerifyEmailDialogTokenChangedEvent event,
-    Emitter<VerifyEmailDialogState> emit,
+  void _onVerifyEmailTokenChangedEvent(
+    VerifyEmailTokenChangedEvent event,
+    Emitter<VerifyEmailState> emit,
   ) {
     emit(state.copyWith(token: event.token));
   }
 
-  Future<void> _onVerifyEmailDialogButtonPressedEvent(
-    VerifyEmailDialogButtonPressedEvent event,
-    Emitter<VerifyEmailDialogState> emit,
+  Future<void> _onVerifyEmailButtonPressedEvent(
+    VerifyEmailButtonPressedEvent event,
+    Emitter<VerifyEmailState> emit,
   ) async {
     emit(
-      VerifyEmailDialogLoadingState(token: state.token),
+      VerifyEmailLoadingState(token: state.token),
     );
 
     final result = await _authenticationVerifyEmailUsecase.call(
@@ -40,13 +40,13 @@ class VerifyEmailDialogBloc extends Bloc<VerifyEmailDialogEvent, VerifyEmailDial
     switch (result) {
       case Success<void, Exception>(value: _):
         emit(
-          VerifyEmailDialogSuccessState(
+          VerifyEmailSuccessState(
             token: state.token,
           ),
         );
       case Failure<void, Exception>(exception: final exception):
         emit(
-          VerifyEmailDialogErrorState(
+          VerifyEmailErrorState(
             token: state.token,
             errorMessage: exception.toString(),
           ),

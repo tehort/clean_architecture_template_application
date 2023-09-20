@@ -2,8 +2,8 @@ part of 'sign_in_bloc.dart';
 
 sealed class SignInEvent extends Equatable {}
 
-class UsernameChanged extends SignInEvent {
-  UsernameChanged({
+class SignInUsernameChangedEvent extends SignInEvent {
+  SignInUsernameChangedEvent({
     required this.username,
   });
 
@@ -13,8 +13,8 @@ class UsernameChanged extends SignInEvent {
   List<Object?> get props => [username];
 }
 
-class PasswordChanged extends SignInEvent {
-  PasswordChanged({
+class SignInPasswordChangedEvent extends SignInEvent {
+  SignInPasswordChangedEvent({
     required this.password,
   });
 
@@ -24,8 +24,8 @@ class PasswordChanged extends SignInEvent {
   List<Object?> get props => [password];
 }
 
-class RememberMeChanged extends SignInEvent {
-  RememberMeChanged({
+class SignInRememberMeChangedEvent extends SignInEvent {
+  SignInRememberMeChangedEvent({
     required this.rememberMe,
   });
 
@@ -35,15 +35,15 @@ class RememberMeChanged extends SignInEvent {
   List<Object?> get props => [rememberMe];
 }
 
-class SignInButtonPressed extends SignInEvent {
-  SignInButtonPressed();
+class SignInSignInButtonPressedEvent extends SignInEvent {
+  SignInSignInButtonPressedEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class SignUpButtonPressed extends SignInEvent {
-  SignUpButtonPressed();
+class SignInSignUpButtonPressedEvent extends SignInEvent {
+  SignInSignUpButtonPressedEvent();
 
   @override
   List<Object?> get props => [];

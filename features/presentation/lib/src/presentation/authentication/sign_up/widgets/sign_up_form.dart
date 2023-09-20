@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_up/bloc/sign_up_bloc.dart';
-import 'package:presentation/src/presentation/authentication/verify_email_dialog/verify_email_dialog.dart';
+import 'package:presentation/src/presentation/authentication/verify_email/widgets/verify_email_dialog.dart';
 import 'package:presentation/src/utils/utils.dart';
 import 'package:presentation/src/widgets/checkbox_form_field.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';

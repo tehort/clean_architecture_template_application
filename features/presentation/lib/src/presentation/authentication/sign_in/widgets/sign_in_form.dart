@@ -72,7 +72,7 @@ class _UsernameInputField extends StatelessWidget {
       key: const Key('loginForm_usernameInput_textField'),
       decoration: const InputDecoration(labelText: 'Username'),
       onChanged: (username) {
-        context.read<SignInBloc>().add(UsernameChanged(username: username));
+        context.read<SignInBloc>().add(SignInUsernameChangedEvent(username: username));
       },
     );
   }
@@ -89,7 +89,7 @@ class _PasswordInputField extends StatelessWidget {
       obscureText: true,
       keyboardType: TextInputType.text,
       onChanged: (password) {
-        context.read<SignInBloc>().add(PasswordChanged(password: password));
+        context.read<SignInBloc>().add(SignInPasswordChangedEvent(password: password));
       },
     );
   }
@@ -102,7 +102,7 @@ class _SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.read<SignInBloc>().add(SignInButtonPressed());
+        context.read<SignInBloc>().add(SignInSignInButtonPressedEvent());
       },
       child: const Text('Sign in'),
     );

@@ -24,7 +24,7 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
       username: username,
       password: password,
     );
-    return result.token;
+    return result.jwtToken;
   }
 
   @override

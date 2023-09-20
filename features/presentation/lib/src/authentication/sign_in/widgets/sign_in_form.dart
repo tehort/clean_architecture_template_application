@@ -32,7 +32,7 @@ class SignInForm extends StatelessWidget {
                       const _AppText(),
                       _UsernameInputField(),
                       _PasswordInputField(),
-                      const _LoginButton(),
+                      const _SignInButton(),
                       const _ForgotPasswordButton(),
                       const _SignUpText(),
                       const _SignUpButton(),
@@ -95,8 +95,8 @@ class _PasswordInputField extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
+class _SignInButton extends StatelessWidget {
+  const _SignInButton();
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _LoginButton extends StatelessWidget {
       onPressed: () {
         context.read<SignInBloc>().add(SignInButtonPressed());
       },
-      child: const Text('Login'),
+      child: const Text('Sign in'),
     );
   }
 }

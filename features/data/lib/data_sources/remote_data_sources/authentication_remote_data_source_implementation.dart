@@ -20,7 +20,7 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
     required String username,
     required String password,
   }) async {
-    final response = await _apiClient.post<AuthenticationSignInResponseModel>(
+    final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
       path: RestApiEndpointsConstants.userSignIn,
       data: AuthenticationSignInRequestModel(
@@ -30,7 +30,9 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
     );
 
     if (response.statusCode == 200) {
-      return response.data!;
+      return AuthenticationSignInResponseModel.fromMap(
+        response.data!,
+      );
     } else {
       throw Exception();
     }

@@ -17,13 +17,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   void _onLoggedInEvent(LoggedIn event, Emitter<AuthenticationState> emit) {
-    emit(
-      const Authenticated(
-          // authenticatedInfo: event.authenticatedInfo,
-          // authenticationToken: event.authenticatToken,
-          // refreshToken: event.refreshToken,
-          ),
-    );
+    emit(const Authenticated());
   }
 
   void _onLoggedOutEvent(LoggedOut event, Emitter<AuthenticationState> emit) {

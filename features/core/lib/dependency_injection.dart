@@ -89,7 +89,7 @@ void _setupDomainDependencies() {
 
 void _setupPresentationDependencies() {
   sl
-    ..registerFactory(AuthenticationBloc.new)
+    ..registerLazySingleton(AuthenticationBloc.new)
     ..registerFactory(
       () => SignInBloc(
         authenticationSignInUsecase: sl<AuthenticationSignInUsecase>(),

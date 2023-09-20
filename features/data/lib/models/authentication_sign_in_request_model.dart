@@ -18,11 +18,11 @@ class AuthenticationSignInRequestModel extends Equatable {
       ];
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    return result
+    final result = <String, dynamic>{}
       ..addAll({'email': email})
       ..addAll({'password': password});
+
+    return result;
   }
 
   String toJson() {

@@ -15,4 +15,8 @@ abstract class AuthenticationRepository {
     required String confirmPassword,
     required bool acceptTerms,
   });
+
+  Future<void> verifyEmail({
+    required String token,
+  });
 }

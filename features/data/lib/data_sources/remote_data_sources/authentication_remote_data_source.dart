@@ -1,5 +1,6 @@
 import 'package:data/models/authentication_sign_in_response_model.dart';
 import 'package:data/models/authentication_sign_up_response_model.dart';
+import 'package:data/models/authentication_verify_email_response_model.dart';
 
 abstract class AuthenticationRemoteDataSource {
   Future<AuthenticationSignInResponseModel> signIn({
@@ -16,4 +17,6 @@ abstract class AuthenticationRemoteDataSource {
     required String confirmPassword,
     required bool acceptTerms,
   });
+
+  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({required String token});
 }

@@ -4,6 +4,8 @@ import 'package:data/models/authentication_sign_in_request_model.dart';
 import 'package:data/models/authentication_sign_in_response_model.dart';
 import 'package:data/models/authentication_sign_up_request_model.dart';
 import 'package:data/models/authentication_sign_up_response_model.dart';
+import 'package:data/models/authentication_verify_email_request_model.dart';
+import 'package:data/models/authentication_verify_email_response_model.dart';
 import 'package:data/utils/rest_api_constants.dart';
 
 class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemoteDataSource {
@@ -60,6 +62,23 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
 
     if (response.statusCode == 200) {
       return AuthenticationSignUpResponseModel.fromMap(response.data);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({required String token}) async {
+    final response = await _apiClient.post(
+      baseUrl: RestApiEndpointsConstants.baseUrl,
+      path: RestApiEndpointsConstants.verifyEmailDialog,
+      data: AuthenticationVerifyEmailRequestModel(
+        token: token,
+      ).toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return AuthenticationVerifyEmailResponseModel.fromMap(response.data);
     } else {
       throw Exception();
     }

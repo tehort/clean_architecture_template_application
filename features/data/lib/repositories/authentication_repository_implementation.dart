@@ -48,4 +48,13 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
     );
     return result.message;
   }
+
+  @override
+  Future<void> verifyEmail({
+    required String token,
+  }) async {
+    await _authenticationRemoteDataSource.verifyEmail(
+      token: token,
+    );
+  }
 }

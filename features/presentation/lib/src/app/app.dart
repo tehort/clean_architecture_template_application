@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/app/dependency_injection.dart';
 import 'package:presentation/src/app/on_generate_route.dart';
-import 'package:presentation/src/authentication/bloc/authentication_bloc.dart';
-import 'package:presentation/src/sign_in/widgets/sign_in_page.dart';
+import 'package:presentation/src/authentication/authentication/bloc/authentication_bloc.dart';
+import 'package:presentation/src/authentication/sign_in/widgets/sign_in_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/src/sign_up/bloc/sign_up_bloc.dart';
-import 'package:presentation/src/sign_up/widgets/sign_up_email_validation_dialog.dart';
+import 'package:presentation/src/authentication/sign_up/bloc/sign_up_bloc.dart';
+import 'package:presentation/src/authentication/verify_email_dialog/verify_email_dialog.dart';
 import 'package:presentation/src/utils/utils.dart';
 import 'package:presentation/src/widgets/checkbox_form_field.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
@@ -32,7 +32,11 @@ class _SignUpFormState extends State<SignUpForm> {
               content: Text(state.message),
             ),
           );
-          Navigator.pop(context);
+          // Navigator.pop(context);
+          showDialog(
+            context: context,
+            builder: (_) => const VerifyEmailDialog(),
+          );
         }
       },
       builder: (context, state) {
@@ -268,7 +272,7 @@ class _ValidateEmailButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (_) => const SignUpEmailValidationDialog(),
+          builder: (_) => const VerifyEmailDialog(),
         );
       },
       child: const Text('Validate here your email'),

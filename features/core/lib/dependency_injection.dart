@@ -13,6 +13,7 @@ import 'package:domain/repositories/authentication_repository.dart';
 import 'package:domain/repositories/preferences_repository.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
 import 'package:domain/usecases/authentication_sign_up_use_case.dart';
+import 'package:domain/usecases/authentication_verify_email_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/presentation.dart';
@@ -78,6 +79,11 @@ void _setupDomainDependencies() {
       () => AuthenticationSignUpUsecase(
         authenticationRepository: sl<AuthenticationRepository>(),
       ),
+    )
+    ..registerFactory(
+      () => AuthenticationVerifyEmailUsecase(
+        authenticationRepository: sl<AuthenticationRepository>(),
+      ),
     );
 }
 
@@ -93,6 +99,11 @@ void _setupPresentationDependencies() {
     ..registerFactory(
       () => SignUpBloc(
         authenticationSignUpUsecase: sl<AuthenticationSignUpUsecase>(),
+      ),
+    )
+    ..registerFactory(
+      () => VerifyEmailDialogBloc(
+        authenticationVerifyEmailUsecase: sl<AuthenticationVerifyEmailUsecase>(),
       ),
     );
 }

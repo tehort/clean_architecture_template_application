@@ -1,5 +1,4 @@
 name: presentation
-description: A starting point for Dart libraries or applications.
 publish_to: 'none'
 version: 1.0.0
 
@@ -18,7 +17,6 @@ dependencies:
   meta: ^1.9.1
   
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   very_good_analysis: ^5.1.0

@@ -1,6 +1,6 @@
-import 'package:data/src/core/secure_local_storage_adapter.dart';
 import 'package:data/src/data_sources/local_data_sources/secure_local_storage_data_source.dart';
 import 'package:data/src/utils/local_storage_constants.dart';
+import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 
 class SecureLocalStorageDataSourceImplementation implements SecureLocalStorageDataSource {
   SecureLocalStorageDataSourceImplementation({

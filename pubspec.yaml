@@ -1,5 +1,4 @@
 name: clean_architecture_template_application
-description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
 
@@ -7,10 +6,20 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  core:
-    path: features/core
+  data:
+    path: features/data
+  domain:
+    path: features/domain
   flutter:
     sdk: flutter
+  presentation:
+    path: features/presentation
+  rest_data_source_adapter:
+    path: dependencies/data_source_adapters/rest_data_source_adapter
+  secure_local_storage_data_source_adapter:
+    path: dependencies/data_source_adapters/secure_local_storage_data_source_adapter
+  service_locator:
+    path: dependencies/service_locator
     
 dev_dependencies:
   flutter_test:

@@ -1,10 +1,8 @@
-import 'package:data/src/core/rest_adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:rest_data_source_adapter/rest_adapter.dart';
 
 class RestAdapterImplementation extends RestAdapter {
-  RestAdapterImplementation({
-    required Dio dio,
-  }) : _dio = dio;
+  RestAdapterImplementation() : _dio = Dio();
 
   final Dio _dio;
 

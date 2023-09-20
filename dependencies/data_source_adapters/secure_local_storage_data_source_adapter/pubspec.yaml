@@ -1,4 +1,4 @@
-name: domain
+name: secure_local_storage_data_source_adapter
 publish_to: 'none'
 version: 1.0.0
 
@@ -6,7 +6,7 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  equatable: ^2.0.5
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

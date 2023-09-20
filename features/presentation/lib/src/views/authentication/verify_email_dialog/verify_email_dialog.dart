@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/src/app/dependency_injection.dart';
-import 'package:presentation/src/authentication/verify_email_dialog/bloc/bloc/verify_email_dialog_bloc.dart';
 import 'package:presentation/src/utils/utils.dart';
+import 'package:presentation/src/views/app/dependency_injection.dart';
+import 'package:presentation/src/views/authentication/verify_email_dialog/bloc/bloc/verify_email_dialog_bloc.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
 class VerifyEmailDialog extends StatefulWidget {

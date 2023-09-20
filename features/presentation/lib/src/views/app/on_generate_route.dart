@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/src/authentication/sign_in/widgets/sign_in_page.dart';
-import 'package:presentation/src/authentication/sign_up/widgets/sign_up_page.dart';
 import 'package:presentation/src/utils/pages_names_constants.dart';
+import 'package:presentation/src/views/authentication/sign_in/widgets/sign_in_page.dart';
+import 'package:presentation/src/views/authentication/sign_up/widgets/sign_up_page.dart';
 import 'package:presentation/src/widgets/no_page_found_widget.dart';
 
 class OnGenerateRoute {

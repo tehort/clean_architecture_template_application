@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/src/authentication/sign_in/bloc/sign_in_bloc.dart';
 import 'package:presentation/src/utils/pages_names_constants.dart';
+import 'package:presentation/src/views/authentication/sign_in/bloc/sign_in_bloc.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
 
 class SignInForm extends StatelessWidget {

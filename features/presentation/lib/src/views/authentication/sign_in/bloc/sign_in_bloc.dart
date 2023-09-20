@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:domain/core/result.dart';
 import 'package:domain/usecases/authentication_sign_in_use_case.dart';
 import 'package:equatable/equatable.dart';
-import 'package:presentation/src/authentication/authentication/bloc/authentication_bloc.dart';
+import 'package:presentation/src/views/authentication/authentication/bloc/authentication_bloc.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

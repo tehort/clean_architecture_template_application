@@ -18,27 +18,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpBloc, SignUpState>(
-      listener: (context, state) {
-        if (state is SignUpErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMessage),
-            ),
-          );
-        } else if (state is SignUpShowSnackbarState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
-          );
-          // Navigator.pop(context);
-          showDialog(
-            context: context,
-            builder: (_) => const VerifyEmailDialog(),
-          );
-        }
-      },
+    return BlocBuilder<SignUpBloc, SignUpState>(
       builder: (context, state) {
         return Stack(
           children: [

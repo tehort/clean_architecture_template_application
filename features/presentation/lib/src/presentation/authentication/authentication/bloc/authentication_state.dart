@@ -8,24 +8,10 @@ sealed class AuthenticationState extends Equatable {
 }
 
 final class Authenticated extends AuthenticationState {
-  const Authenticated(
-      // {
-      // required this.authenticationToken,
-      // required this.refreshToken,
-      // required this.authenticatedInfo,
-      // }
-      );
-
-  // final AuthenticationInfo authenticatedInfo;
-  // final String authenticationToken;
-  // final String refreshToken;
+  const Authenticated();
 
   @override
-  List<Object> get props => [
-        // authenticationToken,
-        // refreshToken,
-        // authenticatedInfo,
-      ];
+  List<Object> get props => [];
 }
 
 final class Unauthenticated extends AuthenticationState {

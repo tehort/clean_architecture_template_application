@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_up/bloc/sign_up_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_up/widgets/sign_up_form.dart';
+import 'package:presentation/src/presentation/authentication/verify_email/widgets/verify_email_dialog.dart';
 import 'package:service_locator/service_locator.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -11,14 +12,36 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
-        centerTitle: true,
-      ),
-      body: BlocProvider(
-        create: (context) => ServiceLocator.get<SignUpBloc>(),
-        child: const SignUpForm(),
+    return BlocProvider(
+      create: (context) => ServiceLocator.get<SignUpBloc>(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Sign Up'),
+          centerTitle: true,
+        ),
+        body: BlocListener<SignUpBloc, SignUpState>(
+          listener: (context, state) {
+            if (state is SignUpErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage),
+                ),
+              );
+            } else if (state is SignUpShowSnackbarState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
+              );
+              // Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (_) => const VerifyEmailDialog(),
+              );
+            }
+          },
+          child: const SignUpForm(),
+        ),
       ),
     );
   }

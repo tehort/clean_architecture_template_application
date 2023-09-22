@@ -9,16 +9,7 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignInBloc, SignInState>(
-      listener: (context, state) {
-        if (state is SignInErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMessage),
-            ),
-          );
-        }
-      },
+    return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) {
         return Stack(
           children: [

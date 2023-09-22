@@ -30,7 +30,7 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, authState) {
                     switch (authState) {
-                      case Unauthenticated():
+                      case Unauthenticated(): 
                         return const SignInPage();
                       case Authenticated():
                         return const HomePage();

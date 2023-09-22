@@ -12,16 +12,27 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: WillPopScope(
-        onWillPop: () => Utils.onWillPop(
-          context,
-          title: 'Are you sure?',
-          content: 'Do you want to exit the app?',
-        ),
-        child: BlocProvider(
-          create: (context) => ServiceLocator.get<SignInBloc>(),
-          child: const SignInForm(),
+    return BlocProvider(
+      create: (context) => ServiceLocator.get<SignInBloc>(),
+      child: Scaffold(
+        body: WillPopScope(
+          onWillPop: () => Utils.onWillPop(
+            context,
+            title: 'Are you sure?',
+            content: 'Do you want to exit the app?',
+          ),
+          child: BlocListener<SignInBloc, SignInState>(
+            listener: (context, state) {
+              if (state is SignInErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                  ),
+                );
+              }
+            },
+            child: const SignInForm(),
+          ),
         ),
       ),
     );

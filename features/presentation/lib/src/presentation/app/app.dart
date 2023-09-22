@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/src/presentation/app/dependency_injection.dart';
 import 'package:presentation/src/presentation/app/on_generate_route.dart';
 import 'package:presentation/src/presentation/app/theme/bloc/theme_bloc.dart';
 import 'package:presentation/src/presentation/authentication/authentication/bloc/authentication_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_in/widgets/sign_in_page.dart';
 import 'package:presentation/src/presentation/home/home/widgets/home_page.dart';
+import 'package:service_locator/service_locator.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<AuthenticationBloc>()),
+        BlocProvider(create: (_) => ServiceLocator.get<AuthenticationBloc>()),
         BlocProvider(create: (context) => ThemeBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

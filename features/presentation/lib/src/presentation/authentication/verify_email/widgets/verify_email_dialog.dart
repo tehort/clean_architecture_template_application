@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/src/presentation/app/dependency_injection.dart';
 import 'package:presentation/src/presentation/authentication/verify_email/bloc/bloc/verify_email_bloc.dart';
 import 'package:presentation/src/utils/utils.dart';
 import 'package:presentation/src/widgets/progress_hud.dart';
+import 'package:service_locator/service_locator.dart';
 
 class VerifyEmailDialog extends StatefulWidget {
   const VerifyEmailDialog({
@@ -20,7 +20,7 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<VerifyEmailBloc>(),
+      create: (context) => ServiceLocator.get<VerifyEmailBloc>(),
       child: BlocConsumer<VerifyEmailBloc, VerifyEmailState>(
         listener: (context, state) {
           if (state is VerifyEmailErrorState) {

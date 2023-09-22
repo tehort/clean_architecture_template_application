@@ -1,4 +1,4 @@
-import 'package:domain/src/core/result.dart';
+import 'package:domain/src/entities/result.dart';
 import 'package:domain/src/repositories/authentication_repository.dart';
 import 'package:domain/src/repositories/preferences_repository.dart';
 

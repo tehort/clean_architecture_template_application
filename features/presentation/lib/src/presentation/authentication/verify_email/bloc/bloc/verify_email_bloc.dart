@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:domain/src/core/result.dart';
+import 'package:domain/src/entities/result.dart';
 import 'package:domain/src/usecases/authentication_verify_email_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';

@@ -9,6 +9,7 @@ import 'package:domain/src/repositories/preferences_repository.dart';
 import 'package:domain/src/usecases/authentication_sign_in_use_case.dart';
 import 'package:domain/src/usecases/authentication_sign_up_use_case.dart';
 import 'package:domain/src/usecases/authentication_verify_email_use_case.dart';
+import 'package:presentation/src/presentation/app/theme/bloc/theme_bloc.dart';
 import 'package:presentation/src/presentation/authentication/authentication/bloc/authentication_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_in/bloc/sign_in_bloc.dart';
 import 'package:presentation/src/presentation/authentication/sign_up/bloc/sign_up_bloc.dart';
@@ -16,8 +17,6 @@ import 'package:presentation/src/presentation/authentication/verify_email/bloc/b
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 import 'package:service_locator/service_locator.dart';
-
-final sl = ServiceLocator();
 
 void configureDependencyInjection() {
   _setupOtherDependencies();
@@ -79,7 +78,9 @@ void _setupDomainDependencies() {
 }
 
 void _setupPresentationDependencies() {
-  ServiceLocator.registerLazySingleton(AuthenticationBloc.new);
+  ServiceLocator.registerLazySingleton(
+    AuthenticationBloc.new,
+  );
   ServiceLocator.registerFactory(
     () => SignInBloc(
       authenticationSignInUsecase: ServiceLocator.get<AuthenticationSignInUsecase>(),
@@ -95,5 +96,8 @@ void _setupPresentationDependencies() {
     () => VerifyEmailBloc(
       authenticationVerifyEmailUsecase: ServiceLocator.get<AuthenticationVerifyEmailUsecase>(),
     ),
+  );
+  ServiceLocator.registerLazySingleton(
+    ThemeBloc.new,
   );
 }

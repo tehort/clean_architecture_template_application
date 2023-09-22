@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:domain/src/core/result.dart';
+import 'package:domain/src/entities/result.dart';
 import 'package:domain/src/usecases/authentication_sign_in_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:presentation/src/presentation/authentication/authentication/bloc/authentication_bloc.dart';

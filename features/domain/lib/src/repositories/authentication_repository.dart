@@ -19,4 +19,8 @@ abstract class AuthenticationRepository {
   Future<void> verifyEmail({
     required String token,
   });
+
+  Future<void> signInWithToken({
+    required String token,
+  });
 }

@@ -1,4 +1,5 @@
 import 'package:data/src/data_sources/remote_data_sources/authentication_remote_data_source.dart';
+import 'package:data/src/models/authentication_sign_in_refresh_token_response_model.dart';
 import 'package:data/src/models/authentication_sign_in_request_model.dart';
 import 'package:data/src/models/authentication_sign_in_response_model.dart';
 import 'package:data/src/models/authentication_sign_up_request_model.dart';
@@ -81,6 +82,25 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
 
     if (response.statusCode == 200) {
       return AuthenticationVerifyEmailResponseModel.fromMap(response.data);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<AuthenticationSignInRefreshTokenResponseModel> signInWithToken({
+    required String token,
+  }) async {
+    final response = _apiClient.post(
+      baseUrl: RestApiEndpointsConstants.baseUrl,
+      path: RestApiEndpointsConstants.verifyEmailDialog,
+      data: AuthenticationVerifyEmailRequestModel(
+        token: token,
+      ).toJson(),
+    );
+
+    if (response.statusCode == 200) {
+      return AuthenticationSignInRefreshTokenResponseModel.fromMap(response.data);
     } else {
       throw Exception();
     }

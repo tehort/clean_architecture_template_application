@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/presentation/app/theme/bloc/theme_bloc.dart';
+import 'package:presentation/src/presentation/authentication/authentication/bloc/authentication_bloc.dart';
 
 class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({super.key});
@@ -34,9 +35,10 @@ class HomePageDrawer extends StatelessWidget {
             title: Text('Token information'),
             leading: Icon(Icons.info),
           ),
-          const ListTile(
-            title: Text('Sign out'),
-            leading: Icon(Icons.logout),
+          ListTile(
+            title: const Text('Sign out'),
+            leading: const Icon(Icons.logout),
+            onTap: () => context.read<AuthenticationBloc>().add(const LoggedOut()),
           ),
         ],
       ),

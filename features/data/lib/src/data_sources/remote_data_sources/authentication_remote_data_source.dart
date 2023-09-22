@@ -18,5 +18,11 @@ abstract class AuthenticationRemoteDataSource {
     required bool acceptTerms,
   });
 
-  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({required String token});
+  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({
+    required String token,
+  });
+
+  Future<void> signInWithToken({
+    required String token,
+  });
 }

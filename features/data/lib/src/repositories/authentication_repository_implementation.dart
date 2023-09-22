@@ -57,4 +57,13 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
       token: token,
     );
   }
+
+  @override
+  Future<void> signInWithToken({
+    required String token,
+  }) async {
+    return _authenticationRemoteDataSource.signInWithToken(
+      token: token,
+    );
+  }
 }

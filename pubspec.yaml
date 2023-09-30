@@ -6,14 +6,14 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  data:
-    path: features/data
-  domain:
-    path: features/domain
+  app:
+    path: features/app
+  authentication:
+    path: features/authentication
+  authentication_repository:
+    path: repositories/authentication_repository
   flutter:
     sdk: flutter
-  presentation:
-    path: features/presentation
   rest_data_source_adapter:
     path: dependencies/data_source_adapters/rest_data_source_adapter
   secure_local_storage_data_source_adapter:

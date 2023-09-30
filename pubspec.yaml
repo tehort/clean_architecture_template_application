@@ -22,9 +22,7 @@ dependencies:
     path: dependencies/service_locator
     
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   very_good_analysis: ^5.1.0
-  
+
 flutter:
   uses-material-design: true

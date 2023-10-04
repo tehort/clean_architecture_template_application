@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class AuthenticationSignInRequestModel extends Equatable {
-  const AuthenticationSignInRequestModel({
+class SignInRequestModel extends Equatable {
+  const SignInRequestModel({
     required this.email,
     required this.password,
   });

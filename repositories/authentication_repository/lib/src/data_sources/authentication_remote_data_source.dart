@@ -1,20 +1,20 @@
-import 'package:authentication_repository/src/models/authentication_sign_in_refresh_token_response_model.dart';
-import 'package:authentication_repository/src/models/authentication_sign_in_request_model.dart';
-import 'package:authentication_repository/src/models/authentication_sign_in_response_model.dart';
-import 'package:authentication_repository/src/models/authentication_sign_up_request_model.dart';
-import 'package:authentication_repository/src/models/authentication_sign_up_response_model.dart';
-import 'package:authentication_repository/src/models/authentication_verify_email_request_model.dart';
-import 'package:authentication_repository/src/models/authentication_verify_email_response_model.dart';
+import 'package:authentication_repository/src/models/sign_in_refresh_token_response_model.dart';
+import 'package:authentication_repository/src/models/sign_in_request_model.dart';
+import 'package:authentication_repository/src/models/sign_in_response_model.dart';
+import 'package:authentication_repository/src/models/sign_up_request_model.dart';
+import 'package:authentication_repository/src/models/sign_up_response_model.dart';
+import 'package:authentication_repository/src/models/verify_email_request_model.dart';
+import 'package:authentication_repository/src/models/verify_email_response_model.dart';
 import 'package:authentication_repository/src/utils/rest_api_constants.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 
 abstract class AuthenticationRemoteDataSource {
-  Future<AuthenticationSignInResponseModel> signIn({
+  Future<SignInResponseModel> signIn({
     required String username,
     required String password,
   });
 
-  Future<AuthenticationSignUpResponseModel> signUp({
+  Future<SignUpResponseModel> signUp({
     required String title,
     required String firstName,
     required String lastName,
@@ -24,7 +24,7 @@ abstract class AuthenticationRemoteDataSource {
     required bool acceptTerms,
   });
 
-  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({
+  Future<VerifyEmailResponseModel> verifyEmail({
     required String token,
   });
 
@@ -41,21 +41,21 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
   final RestAdapter _apiClient;
 
   @override
-  Future<AuthenticationSignInResponseModel> signIn({
+  Future<SignInResponseModel> signIn({
     required String username,
     required String password,
   }) async {
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.userSignIn,
-      data: AuthenticationSignInRequestModel(
+      path: RestApiEndpointsConstants.signIn,
+      data: SignInRequestModel(
         email: username,
         password: password,
       ).toJson(),
     );
 
     if (response.statusCode == 200) {
-      return AuthenticationSignInResponseModel.fromMap(
+      return SignInResponseModel.fromMap(
         response.data!,
       );
     } else {
@@ -64,7 +64,7 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
   }
 
   @override
-  Future<AuthenticationSignUpResponseModel> signUp({
+  Future<SignUpResponseModel> signUp({
     required String title,
     required String firstName,
     required String lastName,
@@ -75,8 +75,8 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
   }) async {
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.userSignUp,
-      data: AuthenticationSignUpRequestModel(
+      path: RestApiEndpointsConstants.signUp,
+      data: SignUpRequestModel(
         title: title,
         firstName: firstName,
         lastName: lastName,
@@ -88,45 +88,45 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
     );
 
     if (response.statusCode == 200) {
-      return AuthenticationSignUpResponseModel.fromMap(response.data);
+      return SignUpResponseModel.fromMap(response.data);
     } else {
       throw Exception();
     }
   }
 
   @override
-  Future<AuthenticationVerifyEmailResponseModel> verifyEmail({
+  Future<VerifyEmailResponseModel> verifyEmail({
     required String token,
   }) async {
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.verifyEmailDialog,
-      data: AuthenticationVerifyEmailRequestModel(
+      path: RestApiEndpointsConstants.verifyEmail,
+      data: VerifyEmailRequestModel(
         token: token,
       ).toJson(),
     );
 
     if (response.statusCode == 200) {
-      return AuthenticationVerifyEmailResponseModel.fromMap(response.data);
+      return VerifyEmailResponseModel.fromMap(response.data);
     } else {
       throw Exception();
     }
   }
 
   @override
-  Future<AuthenticationSignInRefreshTokenResponseModel> signInWithToken({
+  Future<SignInRefreshTokenResponseModel> signInWithToken({
     required String token,
   }) async {
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.verifyEmailDialog,
-      data: AuthenticationVerifyEmailRequestModel(
+      path: RestApiEndpointsConstants.verifyEmail,
+      data: VerifyEmailRequestModel(
         token: token,
       ),
     );
 
     if (response.statusCode == 200) {
-      return AuthenticationSignInRefreshTokenResponseModel.fromMap(
+      return SignInRefreshTokenResponseModel.fromMap(
         response.data,
       );
     } else {

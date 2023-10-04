@@ -2,8 +2,12 @@ import 'package:authentication_repository/src/utils/local_storage_constants.dart
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 
 abstract class AuthenticationSecureLocalStorageDataSource {
-  Future<void> writeToken(String token);
+  Future<void> writeToken(
+    String token,
+  );
+
   Future<void> deleteToken();
+
   Future<String?> getToken();
 }
 
@@ -22,7 +26,9 @@ class AuthenticationSecureLocalStorageDataSourceImplementation implements Authen
   }
 
   @override
-  Future<void> writeToken(String token) {
+  Future<void> writeToken(
+    String token,
+  ) {
     return _localSecureStorageClient.write(
       key: LocalStorageConstants.authenticationTokenKey,
       value: token,

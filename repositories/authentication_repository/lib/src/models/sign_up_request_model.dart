@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class AuthenticationSignUpRequestModel extends Equatable {
-  const AuthenticationSignUpRequestModel({
+class SignUpRequestModel extends Equatable {
+  const SignUpRequestModel({
     required this.title,
     required this.firstName,
     required this.lastName,
@@ -13,11 +13,10 @@ class AuthenticationSignUpRequestModel extends Equatable {
     required this.acceptTerms,
   });
 
-  factory AuthenticationSignUpRequestModel.fromJson(String source) =>
-      AuthenticationSignUpRequestModel.fromMap(json.decode(source));
+  factory SignUpRequestModel.fromJson(String source) => SignUpRequestModel.fromMap(json.decode(source));
 
-  factory AuthenticationSignUpRequestModel.fromMap(Map<String, dynamic> map) {
-    return AuthenticationSignUpRequestModel(
+  factory SignUpRequestModel.fromMap(Map<String, dynamic> map) {
+    return SignUpRequestModel(
       title: map['title'] ?? '',
       firstName: map['firstName'] ?? '',
       lastName: map['lastName'] ?? '',

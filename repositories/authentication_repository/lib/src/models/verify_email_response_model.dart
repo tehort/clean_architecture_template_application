@@ -2,16 +2,15 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class AuthenticationVerifyEmailResponseModel extends Equatable {
-  const AuthenticationVerifyEmailResponseModel({
+class VerifyEmailResponseModel extends Equatable {
+  const VerifyEmailResponseModel({
     required this.message,
   });
 
-  factory AuthenticationVerifyEmailResponseModel.fromJson(String source) =>
-      AuthenticationVerifyEmailResponseModel.fromMap(json.decode(source));
+  factory VerifyEmailResponseModel.fromJson(String source) => VerifyEmailResponseModel.fromMap(json.decode(source));
 
-  factory AuthenticationVerifyEmailResponseModel.fromMap(Map<String, dynamic> map) {
-    return AuthenticationVerifyEmailResponseModel(
+  factory VerifyEmailResponseModel.fromMap(Map<String, dynamic> map) {
+    return VerifyEmailResponseModel(
       message: map['message'] ?? '',
     );
   }

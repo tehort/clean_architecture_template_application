@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class AuthenticationSignInRefreshTokenResponseModel extends Equatable {
-  const AuthenticationSignInRefreshTokenResponseModel({
+class SignInResponseModel extends Equatable {
+  const SignInResponseModel({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -14,10 +14,8 @@ class AuthenticationSignInRefreshTokenResponseModel extends Equatable {
     required this.isVerified,
   });
 
-  factory AuthenticationSignInRefreshTokenResponseModel.fromMap(
-    Map<String, dynamic> map,
-  ) {
-    return AuthenticationSignInRefreshTokenResponseModel(
+  factory SignInResponseModel.fromMap(Map<String, dynamic> map) {
+    return SignInResponseModel(
       id: map['id']?.toDouble() ?? 0.0,
       title: map['title'] ?? '',
       firstName: map['firstName'] ?? '',
@@ -29,8 +27,7 @@ class AuthenticationSignInRefreshTokenResponseModel extends Equatable {
     );
   }
 
-  factory AuthenticationSignInRefreshTokenResponseModel.fromJson(String source) =>
-      AuthenticationSignInRefreshTokenResponseModel.fromMap(json.decode(source));
+  factory SignInResponseModel.fromJson(String source) => SignInResponseModel.fromMap(json.decode(source));
 
   final double id;
   final String title;

@@ -6,6 +6,7 @@ export 'src/presentation/authentication/sign_up/widgets/sign_up_page.dart';
 export 'src/presentation/authentication/verify_email/bloc/bloc/verify_email_bloc.dart';
 export 'src/usecases/sign_in_use_case.dart';
 export 'src/usecases/sign_in_with_token_use_case.dart';
+export 'src/usecases/sign_out_use_case.dart';
 export 'src/usecases/sign_up_use_case.dart';
 export 'src/usecases/verify_email_use_case.dart';
 export 'src/utils/pages_name_constants.dart';

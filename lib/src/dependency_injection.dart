@@ -1,6 +1,7 @@
 import 'package:app/app.dart';
 import 'package:authentication/authentication.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:home/home.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 import 'package:secure_preferences_repository/secure_preferences_repository.dart';
@@ -35,7 +36,6 @@ void _setupDataDependencies() {
       secureLocalStorageAdapter: ServiceLocator.get<SecureLocalStorageAdapter>(),
     ),
   );
-
   ServiceLocator.registerFactory<UserRemoteDataSource>(
     () => UserRemoteDataSourceImplementation(
       apiClient: ServiceLocator.get<RestAdapter>(),
@@ -49,7 +49,6 @@ void _setupDomainDependencies() {
       userRemoteDataSource: ServiceLocator.get<UserRemoteDataSource>(),
     ),
   );
-
   ServiceLocator.registerFactory<SecurePreferencesRepository>(
     () => SecurePreferencesRepositoryImplementation(
       secureLocalStorageDataSource: ServiceLocator.get<SecureLocalStorageDataSource>(),
@@ -79,9 +78,13 @@ void _setupDomainUsecasesDependencies() {
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
-
   ServiceLocator.registerFactory(
     () => SignInWithTokenUsecase(
+      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+    ),
+  );
+  ServiceLocator.registerFactory(
+    () => SignOutUsecase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
@@ -91,11 +94,12 @@ void _setupPresentationDependencies() {
   ServiceLocator.registerLazySingleton(
     () => AuthenticationBloc(
       signInWithTokenUsecase: ServiceLocator.get<SignInWithTokenUsecase>(),
-    )..add(const AppStarted()),
+      signOutUsecase: ServiceLocator.get<SignOutUsecase>(),
+    ),
   );
   ServiceLocator.registerFactory(
     () => SignInBloc(
-      SignInUsecase: ServiceLocator.get<SignInUsecase>(),
+      signInUsecase: ServiceLocator.get<SignInUsecase>(),
       authenticationBloc: ServiceLocator.get<AuthenticationBloc>(),
     ),
   );
@@ -111,5 +115,8 @@ void _setupPresentationDependencies() {
   );
   ServiceLocator.registerLazySingleton(
     ThemeBloc.new,
+  );
+  ServiceLocator.registerLazySingleton(
+    HomeTabBloc.new,
   );
 }

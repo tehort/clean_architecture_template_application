@@ -4,3 +4,5 @@ part of 'theme_bloc.dart';
 sealed class ThemeEvent {}
 
 final class ThemeEventToggle extends ThemeEvent {}
+
+final class ThemeEventAppStartedEvent extends ThemeEvent {}

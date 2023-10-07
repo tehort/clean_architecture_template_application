@@ -1,4 +1,5 @@
 import 'package:app/src/presentation/app/on_generate_route.dart';
+import 'package:app/src/presentation/app/splash_screen.dart';
 import 'package:app/src/presentation/app/theme/bloc/theme_bloc.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,8 @@ class App extends StatelessWidget {
                         return const SignInPage();
                       case Authenticated():
                         return const HomePage();
+                      case Loading():
+                        return const SplashScreen();
                     }
                   },
                 );

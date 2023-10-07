@@ -12,9 +12,10 @@ dependencies:
     path: features/authentication
   authentication_repository:
     path: repositories/authentication_repository
-
   flutter:
     sdk: flutter
+  home:
+    path: features/home
   rest_data_source_adapter:
     path: dependencies/data_source_adapters/rest_data_source_adapter
   secure_local_storage_data_source_adapter:

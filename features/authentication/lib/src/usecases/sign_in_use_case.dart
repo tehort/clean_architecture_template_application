@@ -22,9 +22,6 @@ class SignInUsecase {
       await _authenticationRepository.writeAuthenticationInfo(
         authenticationInfo: response,
       );
-
-      final a = await _authenticationRepository.readAuthenticationInfo();
-
       return Success(response);
     } on Exception catch (e) {
       await _authenticationRepository.deleteAuthenticationInfo();

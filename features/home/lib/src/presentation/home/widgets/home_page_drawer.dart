@@ -2,25 +2,32 @@ import 'package:app/app.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home/src/presentation/home/bloc/home_tab_bloc.dart';
 
 class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({super.key});
 
   @override
-  Drawer build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.purple,
             ),
             child: Text('User name'),
           ),
-          const ListTile(
-            title: Text('Home'),
-            leading: Icon(Icons.home),
+          ListTile(
+            title: const Text('Home'),
+            leading: const Icon(Icons.home),
+            onTap: () {
+              context.read<HomeTabBloc>().add(
+                    TabChangedEvent(homeTab: HomeTab.homePage),
+                  );
+              Navigator.pop(context);
+            },
           ),
           const ListTile(
             title: Text('User information'),
@@ -31,15 +38,20 @@ class HomePageDrawer extends StatelessWidget {
             leading: const Icon(Icons.brightness_4),
             onTap: () => context.read<ThemeBloc>().add(ThemeEventToggle()),
           ),
-          const ListTile(
-            title: Text('Token information'),
-            leading: Icon(Icons.info),
+          ListTile(
+            title: const Text('Token information'),
+            leading: const Icon(Icons.info),
+            onTap: () {
+              context.read<HomeTabBloc>().add(
+                    TabChangedEvent(homeTab: HomeTab.tokenInformationPage),
+                  );
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             title: const Text('Sign out'),
             leading: const Icon(Icons.logout),
-            onTap: () =>
-                context.read<AuthenticationBloc>().add(const LoggedOut()),
+            onTap: () => context.read<AuthenticationBloc>().add(const LoggedOut()),
           ),
         ],
       ),

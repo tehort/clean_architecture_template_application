@@ -7,6 +7,13 @@ sealed class AuthenticationState extends Equatable {
   List<Object> get props => [];
 }
 
+final class Loading extends AuthenticationState {
+  const Loading();
+
+  @override
+  List<Object> get props => [];
+}
+
 final class Authenticated extends AuthenticationState {
   const Authenticated({
     required this.authenticationInfo,

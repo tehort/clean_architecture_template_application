@@ -1,47 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home/src/presentation/home/bloc/home_tab_bloc.dart';
 import 'package:home/src/presentation/home/widgets/home_page_drawer.dart';
+import 'package:home/src/presentation/home_content/widgets/home_content_page.dart';
+import 'package:home/src/presentation/token_information/widgets/token_information_page.dart';
+import 'package:service_locator/service_locator.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('App'),
-      ),
-      drawer: const HomePageDrawer(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: Center(
-              child: Text('JWT Token: '),
-            ),
+    return BlocProvider.value(
+      value: ServiceLocator.get<HomeTabBloc>(),
+      child: Scaffold(
+        drawer: const HomePageDrawer(),
+        appBar: AppBar(
+          title: BlocBuilder<HomeTabBloc, HomeTabState>(
+            builder: (context, state) {
+              return Text(state.selectedTab.value);
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Revoke Token'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Refresh Token'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Test Token'),
-            ),
-          ),
-        ],
+        ),
+        body: BlocBuilder<HomeTabBloc, HomeTabState>(
+          builder: (context, state) {
+            switch (state.selectedTab) {
+              case HomeTab.homePage:
+                return const HomeContentPage();
+              case HomeTab.tokenInformationPage:
+                return const TokenInformationPage();
+            }
+          },
+        ),
       ),
     );
   }

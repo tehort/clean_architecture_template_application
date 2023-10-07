@@ -11,9 +11,9 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc({
-    required SignInUsecase,
+    required signInUsecase,
     required authenticationBloc,
-  })  : _authenticationSignInUsecase = SignInUsecase,
+  })  : _authenticationSignInUsecase = signInUsecase,
         _authenticationBloc = authenticationBloc,
         super(const SignInState.initial()) {
     on<SignInUsernameChangedEvent>(_onSignInUsernameChanged);

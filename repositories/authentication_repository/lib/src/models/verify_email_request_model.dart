@@ -23,8 +23,9 @@ class VerifyEmailRequestModel extends Equatable {
       ];
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{'token': token};
-    return result;
+    return <String, dynamic>{
+      'token': token,
+    };
   }
 
   String toJson() => json.encode(toMap());

@@ -9,11 +9,10 @@ dependencies:
   core:
     path: ../../dependencies/core
   equatable: ^2.0.5
-  flutter_secure_storage: ^9.0.0
   rest_data_source_adapter:
     path: ../../dependencies/data_source_adapters/rest_data_source_adapter
-  secure_local_storage_data_source_adapter:
-    path: ../../dependencies/data_source_adapters/secure_local_storage_data_source_adapter
+  secure_preferences_repository:
+    path: ../secure_preferences_repository
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

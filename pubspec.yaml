@@ -12,15 +12,20 @@ dependencies:
     path: features/authentication
   authentication_repository:
     path: repositories/authentication_repository
+
   flutter:
     sdk: flutter
   rest_data_source_adapter:
     path: dependencies/data_source_adapters/rest_data_source_adapter
   secure_local_storage_data_source_adapter:
     path: dependencies/data_source_adapters/secure_local_storage_data_source_adapter
+  secure_preferences_repository:
+    path: repositories/secure_preferences_repository
   service_locator:
     path: dependencies/service_locator
-    
+  user_repository:
+    path: repositories/user_repository
+
 dev_dependencies:
   very_good_analysis: ^5.1.0
 

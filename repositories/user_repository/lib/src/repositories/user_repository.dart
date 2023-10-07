@@ -29,12 +29,16 @@ class UserRepositoryImplementation extends UserRepository {
   final UserRemoteDataSource _userRemoteDataSource;
 
   @override
-  Future<void> createUser({required User user}) async {
+  Future<void> createUser({
+    required User user,
+  }) async {
     await _userRemoteDataSource.createUser(user: user);
   }
 
   @override
-  Future<void> deleteUser({required int id}) async {
+  Future<void> deleteUser({
+    required int id,
+  }) async {
     await _userRemoteDataSource.deleteUser(id: id);
   }
 
@@ -44,12 +48,16 @@ class UserRepositoryImplementation extends UserRepository {
   }
 
   @override
-  Future<User> getSingleUser({required int id}) async {
+  Future<User> getSingleUser({
+    required int id,
+  }) async {
     return _userRemoteDataSource.getUser(id: id);
   }
 
   @override
-  Future<void> updateUser({required User user}) async {
+  Future<void> updateUser({
+    required User user,
+  }) async {
     await _userRemoteDataSource.updateUser(user: user);
   }
 }

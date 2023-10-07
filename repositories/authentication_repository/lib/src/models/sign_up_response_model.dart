@@ -16,11 +16,14 @@ class SignUpResponseModel extends Equatable {
   final String message;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [
+        message,
+      ];
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{'message': message};
-    return result;
+    return <String, dynamic>{
+      'message': message,
+    };
   }
 
   String toJson() => json.encode(toMap());

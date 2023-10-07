@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:authentication/authentication.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -10,9 +11,9 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc({
-    required authenticationSignInUsecase,
+    required SignInUsecase,
     required authenticationBloc,
-  })  : _authenticationSignInUsecase = authenticationSignInUsecase,
+  })  : _authenticationSignInUsecase = SignInUsecase,
         _authenticationBloc = authenticationBloc,
         super(const SignInState.initial()) {
     on<SignInUsernameChangedEvent>(_onSignInUsernameChanged);
@@ -22,7 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInSignUpButtonPressedEvent>(_onSignInSignUpButtonPressed);
   }
 
-  final AuthenticationSignInUsecase _authenticationSignInUsecase;
+  final SignInUsecase _authenticationSignInUsecase;
   final AuthenticationBloc _authenticationBloc;
 
   Future<void> _onSignInUsernameChanged(
@@ -61,17 +62,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     final result = await _authenticationSignInUsecase.call(
       username: state.username,
       password: state.password,
+      keepSignedIn: state.rememberMe,
     );
 
     switch (result) {
-      case Success<void, Exception>(value: _):
-        _authenticationBloc.add(LoggedIn());
-      case Failure<void, Exception>(exception: final exception):
+      case Success<AuthenticationInfo, Exception>(value: _):
+        _authenticationBloc.add(LoggedIn(authenticationInfo: result.value));
+      case Failure<AuthenticationInfo, Exception>(exception: final exception):
         emit(
           SignInErrorState(
-            rememberMe: state.rememberMe,
             username: state.username,
             password: state.password,
+            rememberMe: state.rememberMe,
             errorMessage: exception.toString(),
           ),
         );

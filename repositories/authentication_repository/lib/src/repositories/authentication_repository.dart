@@ -1,10 +1,13 @@
 import 'package:authentication_repository/src/data_sources/authentication_remote_data_source.dart';
-import 'package:authentication_repository/src/data_sources/secure_local_storage_data_source.dart';
+import 'package:authentication_repository/src/entities/authentication_info.dart';
+import 'package:authentication_repository/src/utils/local_storage_constants.dart';
+import 'package:secure_preferences_repository/secure_preferences_repository.dart';
 
 abstract class AuthenticationRepository {
-  Future<String> signIn({
+  Future<AuthenticationInfo> signIn({
     required String username,
     required String password,
+    required bool keepSignedIn,
   });
 
   Future<String> signUp({
@@ -25,35 +28,49 @@ abstract class AuthenticationRepository {
     required String token,
   });
 
-  Future<void> writeToken({
-    required String token,
+  Future<void> writeAuthenticationInfo({
+    required AuthenticationInfo authenticationInfo,
   });
 
-  Future<void> deleteToken();
+  Future<void> deleteAuthenticationInfo();
 
-  Future<String?> getToken();
+  Future<String?> readAuthenticationInfo();
 }
 
 class AuthenticationRepositoryImplementation extends AuthenticationRepository {
   AuthenticationRepositoryImplementation({
     required AuthenticationRemoteDataSource authenticationRemoteDataSource,
-    required AuthenticationSecureLocalStorageDataSource authenticationSecureLocalStorageDataSource,
+    required SecurePreferencesRepository securePreferencesRepository,
   })  : _authenticationRemoteDataSource = authenticationRemoteDataSource,
-        _authenticationSecureLocalStorageDataSource = authenticationSecureLocalStorageDataSource;
+        _securePreferencesRepository = securePreferencesRepository;
 
   final AuthenticationRemoteDataSource _authenticationRemoteDataSource;
-  final AuthenticationSecureLocalStorageDataSource _authenticationSecureLocalStorageDataSource;
+  final SecurePreferencesRepository _securePreferencesRepository;
 
   @override
-  Future<String> signIn({
+  Future<AuthenticationInfo> signIn({
     required String username,
     required String password,
+    required bool keepSignedIn,
   }) async {
-    final result = await _authenticationRemoteDataSource.signIn(
+    final response = await _authenticationRemoteDataSource.signIn(
       username: username,
       password: password,
     );
-    return result.jwtToken;
+
+    return AuthenticationInfo(
+      id: response.id,
+      title: response.title!,
+      firstName: response.firstName!,
+      lastName: response.lastName!,
+      email: response.email!,
+      role: response.role!,
+      isVerified: response.isVerified,
+      jwtToken: response.jwtToken!,
+      created: response.created,
+      updated: response.updated,
+      keepSignedIn: keepSignedIn,
+    );
   }
 
   @override
@@ -97,17 +114,26 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
   }
 
   @override
-  Future<void> writeToken({required String token}) async {
-    await _authenticationSecureLocalStorageDataSource.writeToken(token);
+  Future<void> writeAuthenticationInfo({
+    required AuthenticationInfo authenticationInfo,
+  }) async {
+    await _securePreferencesRepository.write(
+      key: LocalStorageConstants.authenticationInfoKey,
+      value: authenticationInfo.toJson(),
+    );
   }
 
   @override
-  Future<void> deleteToken() async {
-    await _authenticationSecureLocalStorageDataSource.deleteToken();
+  Future<void> deleteAuthenticationInfo() async {
+    await _securePreferencesRepository.delete(
+      key: LocalStorageConstants.authenticationInfoKey,
+    );
   }
 
   @override
-  Future<String?> getToken() {
-    return _authenticationSecureLocalStorageDataSource.getToken();
+  Future<String?> readAuthenticationInfo() {
+    return _securePreferencesRepository.read(
+      key: LocalStorageConstants.authenticationInfoKey,
+    );
   }
 }

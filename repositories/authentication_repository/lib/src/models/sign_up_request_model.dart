@@ -49,9 +49,7 @@ class SignUpRequestModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    return result
+    return <String, dynamic>{}
       ..addAll({'title': title})
       ..addAll({'firstName': firstName})
       ..addAll({'lastName': lastName})

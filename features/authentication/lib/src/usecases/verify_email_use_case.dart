@@ -1,8 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:core/core.dart';
 
-class AuthenticationVerifyEmailUsecase {
-  AuthenticationVerifyEmailUsecase({
+class VerifyEmailUsecase {
+  VerifyEmailUsecase({
     required AuthenticationRepository authenticationRepository,
   }) : _authenticationRepository = authenticationRepository;
 

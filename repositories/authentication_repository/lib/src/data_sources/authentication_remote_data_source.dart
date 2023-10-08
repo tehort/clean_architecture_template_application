@@ -1,4 +1,3 @@
-import 'package:authentication_repository/src/models/sign_in_refresh_token_response_model.dart';
 import 'package:authentication_repository/src/models/sign_in_request_model.dart';
 import 'package:authentication_repository/src/models/sign_in_response_model.dart';
 import 'package:authentication_repository/src/models/sign_up_request_model.dart';
@@ -25,10 +24,6 @@ abstract class AuthenticationRemoteDataSource {
   });
 
   Future<VerifyEmailResponseModel> verifyEmail({
-    required String token,
-  });
-
-  Future<void> signInWithToken({
     required String token,
   });
 }
@@ -108,27 +103,6 @@ class AuthenticationRemoteDataSourceImplementation implements AuthenticationRemo
 
     if (response.statusCode == 200) {
       return VerifyEmailResponseModel.fromMap(response.data);
-    } else {
-      throw Exception();
-    }
-  }
-
-  @override
-  Future<SignInRefreshTokenResponseModel> signInWithToken({
-    required String token,
-  }) async {
-    final response = await _apiClient.post(
-      baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.verifyEmail,
-      data: VerifyEmailRequestModel(
-        token: token,
-      ),
-    );
-
-    if (response.statusCode == 200) {
-      return SignInRefreshTokenResponseModel.fromMap(
-        response.data,
-      );
     } else {
       throw Exception();
     }

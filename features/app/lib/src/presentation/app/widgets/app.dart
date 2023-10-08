@@ -1,6 +1,6 @@
-import 'package:app/src/presentation/app/on_generate_route.dart';
-import 'package:app/src/presentation/app/splash_screen.dart';
-import 'package:app/src/presentation/app/theme/bloc/theme_bloc.dart';
+import 'package:app/app.dart';
+import 'package:app/src/presentation/routes/on_generate_route.dart';
+import 'package:app/src/presentation/splash/widgets/splash_screen.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +14,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ServiceLocator.get<AuthenticationBloc>()),
-        BlocProvider(create: (context) => ThemeBloc()),
+        BlocProvider.value(value: ServiceLocator.get<AuthenticationBloc>()),
+        BlocProvider.value(value: ServiceLocator.get<ThemeBloc>()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {

@@ -19,8 +19,8 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ServiceLocator.get<VerifyEmailBloc>(),
+    return BlocProvider.value(
+      value: ServiceLocator.get<VerifyEmailBloc>(),
       child: BlocConsumer<VerifyEmailBloc, VerifyEmailState>(
         listener: (context, state) {
           if (state is VerifyEmailErrorState) {

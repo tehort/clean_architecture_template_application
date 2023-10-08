@@ -25,6 +25,8 @@ dependencies:
     path: ../../dependencies/data_source_adapters/secure_local_storage_data_source_adapter
   service_locator:
     path: ../../dependencies/service_locator
+  user_repository:
+    path: ../../repositories/user_repository
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

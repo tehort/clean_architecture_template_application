@@ -1,7 +1,7 @@
 import 'package:authentication_repository/src/data_sources/authentication_remote_data_source.dart';
-import 'package:authentication_repository/src/entities/authentication_info.dart';
 import 'package:authentication_repository/src/utils/local_storage_constants.dart';
 import 'package:secure_preferences_repository/secure_preferences_repository.dart';
+import 'package:usecases/usecases.dart';
 
 abstract class AuthenticationRepository {
   Future<AuthenticationInfo> signIn({
@@ -24,17 +24,13 @@ abstract class AuthenticationRepository {
     required String token,
   });
 
-  Future<void> signInWithToken({
-    required String token,
-  });
-
   Future<void> writeAuthenticationInfo({
     required AuthenticationInfo authenticationInfo,
   });
 
   Future<void> deleteAuthenticationInfo();
 
-  Future<String?> readAuthenticationInfo();
+  Future<AuthenticationInfo?> readAuthenticationInfo();
 }
 
 class AuthenticationRepositoryImplementation extends AuthenticationRepository {
@@ -105,15 +101,6 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithToken({
-    required String token,
-  }) async {
-    return _authenticationRemoteDataSource.signInWithToken(
-      token: token,
-    );
-  }
-
-  @override
   Future<void> writeAuthenticationInfo({
     required AuthenticationInfo authenticationInfo,
   }) async {
@@ -131,9 +118,11 @@ class AuthenticationRepositoryImplementation extends AuthenticationRepository {
   }
 
   @override
-  Future<String?> readAuthenticationInfo() {
-    return _securePreferencesRepository.read(
+  Future<AuthenticationInfo?> readAuthenticationInfo() async {
+    final string = await _securePreferencesRepository.read(
       key: LocalStorageConstants.authenticationInfoKey,
     );
+
+    return string == null ? null : AuthenticationInfo.fromJson(string);
   }
 }

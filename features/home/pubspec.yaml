@@ -11,6 +11,8 @@ dependencies:
   authentication:
     path: ../authentication
   bloc: ^8.1.2
+  core:
+    path: ../../dependencies/core
   dio: ^5.3.2
   equatable: ^2.0.5
   flutter:
@@ -23,6 +25,8 @@ dependencies:
     path: ../../dependencies/data_source_adapters/secure_local_storage_data_source_adapter
   service_locator:
     path: ../../dependencies/service_locator
+  usecases:
+    path: ../../usecases
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

@@ -1,8 +1,8 @@
-import 'package:authentication/src/usecases/verify_email_use_case.dart';
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:usecases/usecases.dart';
 
 part 'verify_email_event.dart';
 part 'verify_email_state.dart';
@@ -16,7 +16,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     on<VerifyEmailButtonPressedEvent>(_onVerifyEmailButtonPressedEvent);
   }
 
-  final VerifyEmailUsecase _authenticationVerifyEmailUsecase;
+  final VerifyEmailUseCase _authenticationVerifyEmailUsecase;
 
   void _onVerifyEmailTokenChangedEvent(
     VerifyEmailTokenChangedEvent event,

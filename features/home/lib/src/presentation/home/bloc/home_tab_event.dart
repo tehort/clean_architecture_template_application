@@ -1,5 +1,6 @@
 part of 'home_tab_bloc.dart';
 
+@immutable
 sealed class HomeTabEvent extends Equatable {}
 
 final class TabChangedEvent extends HomeTabEvent {

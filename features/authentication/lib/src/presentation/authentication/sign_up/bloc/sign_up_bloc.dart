@@ -1,7 +1,7 @@
-import 'package:authentication/src/usecases/sign_up_use_case.dart';
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:usecases/usecases.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
@@ -23,7 +23,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpAcceptTermsChangedEvent>(_onSignUpAcceptTermsChangedEvent);
   }
 
-  final SignUpUsecase _authenticationSignUpUsecase;
+  final SignUpUseCase _authenticationSignUpUsecase;
 
   void _onSignUpTitleChanged(
     SignUpTitleChangedEvent event,

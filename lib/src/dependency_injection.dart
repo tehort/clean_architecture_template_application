@@ -6,6 +6,7 @@ import 'package:rest_data_source_adapter/rest_adapter.dart';
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 import 'package:secure_preferences_repository/secure_preferences_repository.dart';
 import 'package:service_locator/service_locator.dart';
+import 'package:usecases/usecases.dart';
 import 'package:user_repository/user_repository.dart';
 
 void configureDependencyInjection() {
@@ -64,28 +65,34 @@ void _setupDomainDependencies() {
 
 void _setupDomainUsecasesDependencies() {
   ServiceLocator.registerFactory(
-    () => SignInUsecase(
+    () => SignInUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
   ServiceLocator.registerFactory(
-    () => SignUpUsecase(
+    () => SignUpUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
   ServiceLocator.registerFactory(
-    () => VerifyEmailUsecase(
+    () => VerifyEmailUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
   ServiceLocator.registerFactory(
-    () => SignInWithTokenUsecase(
+    () => SignInWithTokenUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
     ),
   );
   ServiceLocator.registerFactory(
-    () => SignOutUsecase(
+    () => SignOutUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+    ),
+  );
+  ServiceLocator.registerFactory(
+    () => GetLoggedUserUseCase(
+      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+      userRepository: ServiceLocator.get<UserRepository>(),
     ),
   );
 }
@@ -93,24 +100,24 @@ void _setupDomainUsecasesDependencies() {
 void _setupPresentationDependencies() {
   ServiceLocator.registerLazySingleton(
     () => AuthenticationBloc(
-      signInWithTokenUsecase: ServiceLocator.get<SignInWithTokenUsecase>(),
-      signOutUsecase: ServiceLocator.get<SignOutUsecase>(),
+      signInWithTokenUsecase: ServiceLocator.get<SignInWithTokenUseCase>(),
+      signOutUsecase: ServiceLocator.get<SignOutUseCase>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => SignInBloc(
-      signInUsecase: ServiceLocator.get<SignInUsecase>(),
+      signInUsecase: ServiceLocator.get<SignInUseCase>(),
       authenticationBloc: ServiceLocator.get<AuthenticationBloc>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => SignUpBloc(
-      signUpUsecase: ServiceLocator.get<SignUpUsecase>(),
+      signUpUsecase: ServiceLocator.get<SignUpUseCase>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => VerifyEmailBloc(
-      verifyEmailUsecase: ServiceLocator.get<VerifyEmailUsecase>(),
+      verifyEmailUsecase: ServiceLocator.get<VerifyEmailUseCase>(),
     ),
   );
   ServiceLocator.registerLazySingleton(
@@ -118,5 +125,10 @@ void _setupPresentationDependencies() {
   );
   ServiceLocator.registerLazySingleton(
     HomeTabBloc.new,
+  );
+  ServiceLocator.registerLazySingleton(
+    () => HomePageContentBloc(
+      getLoggedUserUseCase: ServiceLocator.get<GetLoggedUserUseCase>(),
+    ),
   );
 }

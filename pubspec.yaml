@@ -24,6 +24,8 @@ dependencies:
     path: repositories/secure_preferences_repository
   service_locator:
     path: dependencies/service_locator
+  usecases:
+    path: usecases
   user_repository:
     path: repositories/user_repository
 

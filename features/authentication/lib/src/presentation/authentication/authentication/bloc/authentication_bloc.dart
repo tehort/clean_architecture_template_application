@@ -1,17 +1,15 @@
-import 'package:authentication/src/usecases/sign_in_with_token_use_case.dart';
-import 'package:authentication/src/usecases/sign_out_use_case.dart';
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:usecases/usecases.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
-    required SignInWithTokenUsecase signInWithTokenUsecase,
-    required SignOutUsecase signOutUsecase,
+    required SignInWithTokenUseCase signInWithTokenUsecase,
+    required SignOutUseCase signOutUsecase,
   })  : _signInWithTokenUsecase = signInWithTokenUsecase,
         _signOutUsecase = signOutUsecase,
         super(const Loading()) {
@@ -20,8 +18,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<LoggedOut>(_onLoggedOutEvent);
   }
 
-  final SignInWithTokenUsecase _signInWithTokenUsecase;
-  final SignOutUsecase _signOutUsecase;
+  final SignInWithTokenUseCase _signInWithTokenUsecase;
+  final SignOutUseCase _signOutUsecase;
 
   Future<void> _onAppStartedEvent(AppStarted event, Emitter<AuthenticationState> emit) async {
     emit(const Loading());

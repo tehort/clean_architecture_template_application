@@ -12,8 +12,8 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ServiceLocator.get<SignUpBloc>(),
+    return BlocProvider.value(
+      value: ServiceLocator.get<SignUpBloc>(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Sign Up'),

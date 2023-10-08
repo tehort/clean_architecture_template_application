@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:authentication/authentication.dart';
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:usecases/usecases.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
@@ -23,7 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInSignUpButtonPressedEvent>(_onSignInSignUpButtonPressed);
   }
 
-  final SignInUsecase _authenticationSignInUsecase;
+  final SignInUseCase _authenticationSignInUsecase;
   final AuthenticationBloc _authenticationBloc;
 
   Future<void> _onSignInUsernameChanged(

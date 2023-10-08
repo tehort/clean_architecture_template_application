@@ -7,10 +7,10 @@ class TokenInformationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: context.read<AuthenticationBloc>(),
-      child: Scaffold(
-        body: BlocSelector<AuthenticationBloc, AuthenticationState, Authenticated>(
+    return Scaffold(
+      body: BlocProvider.value(
+        value: context.read<AuthenticationBloc>(),
+        child: BlocSelector<AuthenticationBloc, AuthenticationState, Authenticated>(
           selector: (state) => state as Authenticated,
           builder: (context, state) {
             return Column(

@@ -45,9 +45,7 @@ final class SignInLoadingState extends SignInState {
 
   @override
   List<Object> get props => [
-        rememberMe,
-        username,
-        password,
+        super.props,
       ];
 }
 
@@ -63,9 +61,7 @@ final class SignInErrorState extends SignInState {
 
   @override
   List<Object> get props => [
-        rememberMe,
-        username,
-        password,
+        ...super.props,
         errorMessage,
       ];
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/src/presentation/home/bloc/home_tab_bloc.dart';
 import 'package:home/src/presentation/home/widgets/home_page_drawer.dart';
-import 'package:home/src/presentation/home_content/widgets/home_content_page.dart';
+import 'package:home/src/presentation/home_content/home_page_content.dart';
 import 'package:home/src/presentation/token_information/widgets/token_information_page.dart';
 import 'package:service_locator/service_locator.dart';
 
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             switch (state.selectedTab) {
               case HomeTab.homePage:
-                return const HomeContentPage();
+                return const HomePageContentProvider();
               case HomeTab.tokenInformationPage:
                 return const TokenInformationPage();
             }

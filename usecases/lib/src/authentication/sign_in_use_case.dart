@@ -1,8 +1,9 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:core/core.dart';
+import 'package:usecases/usecases.dart';
 
-class SignInUsecase {
-  SignInUsecase({
+class SignInUseCase {
+  SignInUseCase({
     required AuthenticationRepository authenticationRepository,
   }) : _authenticationRepository = authenticationRepository;
 

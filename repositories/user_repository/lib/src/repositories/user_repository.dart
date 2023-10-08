@@ -1,5 +1,5 @@
+import 'package:usecases/usecases.dart';
 import 'package:user_repository/src/data_sources/user_remote_data_source.dart';
-import 'package:user_repository/src/entities/user.dart';
 
 abstract class UserRepository {
   Future<void> createUser({

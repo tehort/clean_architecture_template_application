@@ -1,2 +1,2 @@
-export 'src/presentation/app/app.dart';
-export 'src/presentation/app/theme/bloc/theme_bloc.dart';
+export 'src/presentation/app/widgets/app.dart';
+export 'src/presentation/theme/bloc/theme_bloc.dart';

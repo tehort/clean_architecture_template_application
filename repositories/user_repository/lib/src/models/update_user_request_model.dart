@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:user_repository/src/entities/user.dart';
+import 'package:usecases/usecases.dart';
 
 class UpdateUserRequestModel extends Equatable {
   const UpdateUserRequestModel({

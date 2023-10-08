@@ -13,6 +13,8 @@ dependencies:
     path: ../../dependencies/data_source_adapters/rest_data_source_adapter
   secure_preferences_repository:
     path: ../secure_preferences_repository
+  usecases:
+    path: ../../usecases
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

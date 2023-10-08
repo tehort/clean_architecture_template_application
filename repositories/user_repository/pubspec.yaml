@@ -11,6 +11,8 @@ dependencies:
   equatable: ^2.0.5
   rest_data_source_adapter:
     path: ../../dependencies/data_source_adapters/rest_data_source_adapter
+  usecases:
+    path: ../../usecases
 
 dev_dependencies:
   very_good_analysis: ^5.1.0

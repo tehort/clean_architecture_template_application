@@ -1,39 +1,36 @@
-import 'package:app/app.dart';
-import 'package:authentication/authentication.dart';
+import 'package:app_module/app_module.dart';
+import 'package:authentication_domain/authentication_domain.dart';
+import 'package:authentication_module/authentication_module.dart';
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:home/home.dart';
+import 'package:home_module/home_module.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
-import 'package:secure_preferences_repository/secure_preferences_repository.dart';
 import 'package:service_locator/service_locator.dart';
-import 'package:usecases/usecases.dart';
+import 'package:user_domain/user_domain.dart';
 import 'package:user_repository/user_repository.dart';
 
 void configureDependencyInjection() {
-  _setupOtherDependencies();
   _setupDataDependencies();
   _setupDomainDependencies();
   _setupDomainUsecasesDependencies();
   _setupPresentationDependencies();
 }
 
-Future<void> _setupOtherDependencies() async {
+void _setupDataDependencies() {
   ServiceLocator.registerLazySingleton<RestAdapter>(
     RestAdapterImplementation.new,
   );
   ServiceLocator.registerFactory<SecureLocalStorageAdapter>(
     SecureLocalStorageAdapterImplementation.new,
   );
-}
 
-void _setupDataDependencies() {
-  ServiceLocator.registerFactory<AuthenticationRemoteDataSource>(
-    () => AuthenticationRemoteDataSourceImplementation(
+  ServiceLocator.registerFactory<AuthenticationRemoteDataSourceContract>(
+    () => RemoteAuthenticationDataSourceImplementation(
       apiClient: ServiceLocator.get<RestAdapter>(),
     ),
   );
-  ServiceLocator.registerFactory<SecureLocalStorageDataSource>(
-    () => SecureLocalStorageDataSourceImplementation(
+  ServiceLocator.registerFactory<AuthenticationLocalDataSourceContract>(
+    () => AuthenticationLocalDataSourceImplementation(
       secureLocalStorageAdapter: ServiceLocator.get<SecureLocalStorageAdapter>(),
     ),
   );
@@ -45,54 +42,49 @@ void _setupDataDependencies() {
 }
 
 void _setupDomainDependencies() {
-  ServiceLocator.registerFactory<UserRepository>(
+  ServiceLocator.registerFactory<UserRepositoryContract>(
     () => UserRepositoryImplementation(
       userRemoteDataSource: ServiceLocator.get<UserRemoteDataSource>(),
     ),
   );
-  ServiceLocator.registerFactory<SecurePreferencesRepository>(
-    () => SecurePreferencesRepositoryImplementation(
-      secureLocalStorageDataSource: ServiceLocator.get<SecureLocalStorageDataSource>(),
-    ),
-  );
-  ServiceLocator.registerFactory<AuthenticationRepository>(
+  ServiceLocator.registerFactory<AuthenticationRepositoryContract>(
     () => AuthenticationRepositoryImplementation(
-      authenticationRemoteDataSource: ServiceLocator.get<AuthenticationRemoteDataSource>(),
-      securePreferencesRepository: ServiceLocator.get<SecurePreferencesRepository>(),
+      authenticationRemoteDataSource: ServiceLocator.get<AuthenticationRemoteDataSourceContract>(),
+      authenticationLocalDataSource: ServiceLocator.get<AuthenticationLocalDataSourceContract>(),
     ),
   );
 }
 
 void _setupDomainUsecasesDependencies() {
   ServiceLocator.registerFactory(
-    () => SignInUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+    () => SignInWithCredentialsUseCase(
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => SignUpUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => VerifyEmailUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
   ServiceLocator.registerFactory(
-    () => SignInWithTokenUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+    () => SignInFromStorageUseCase(
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => SignOutUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => GetLoggedUserUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepository>(),
-      userRepository: ServiceLocator.get<UserRepository>(),
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
+      userRepository: ServiceLocator.get<UserRepositoryContract>(),
     ),
   );
 }
@@ -100,13 +92,13 @@ void _setupDomainUsecasesDependencies() {
 void _setupPresentationDependencies() {
   ServiceLocator.registerLazySingleton(
     () => AuthenticationBloc(
-      signInWithTokenUsecase: ServiceLocator.get<SignInWithTokenUseCase>(),
+      signInFromStorageUsecase: ServiceLocator.get<SignInFromStorageUseCase>(),
       signOutUsecase: ServiceLocator.get<SignOutUseCase>(),
     ),
   );
   ServiceLocator.registerFactory(
     () => SignInBloc(
-      signInUsecase: ServiceLocator.get<SignInUseCase>(),
+      signInWithCredentialsUsecase: ServiceLocator.get<SignInWithCredentialsUseCase>(),
       authenticationBloc: ServiceLocator.get<AuthenticationBloc>(),
     ),
   );

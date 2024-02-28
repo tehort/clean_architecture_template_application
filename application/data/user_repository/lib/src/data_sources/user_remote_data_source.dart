@@ -51,7 +51,7 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
   }) async {
     final response = await _apiClient.delete(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.deleteAccount(id: id),
+      path: RestApiEndpointsConstants.deleteUser(id: id),
       data: DeleteUserRequestModel(id: id).toMap(),
     );
     if (response.statusCode != 200) {
@@ -65,7 +65,7 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
   }) async {
     final response = await _apiClient.get(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.getAccount(id: id),
+      path: RestApiEndpointsConstants.getUser(id: id),
     );
     if (response.statusCode == 200) {
       return User.fromMap(response.data!);
@@ -97,7 +97,7 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
   }) async {
     final response = await _apiClient.put(
       baseUrl: RestApiEndpointsConstants.baseUrl,
-      path: RestApiEndpointsConstants.putAccount(id: user.id),
+      path: RestApiEndpointsConstants.putUser(id: user.id),
       data: CreateUserRequestModel(user: user).toMap(),
     );
     if (response.statusCode != 200) {

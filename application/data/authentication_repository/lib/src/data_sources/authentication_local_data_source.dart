@@ -3,13 +3,13 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 
 abstract class AuthenticationLocalDataSourceContract {
-  Future<void> storeAuthenticationInfo({
+  Future<void> storeAuthInfo({
     required AuthenticationInfo value,
   });
 
-  Future<void> eraseAuthenticationInfo();
+  Future<void> eraseAuthInfo();
 
-  Future<AuthenticationInfo?> readAuthenticationInfo();
+  Future<AuthenticationInfo?> readAuthInfo();
 }
 
 class AuthenticationLocalDataSourceImplementation implements AuthenticationLocalDataSourceContract {
@@ -20,17 +20,18 @@ class AuthenticationLocalDataSourceImplementation implements AuthenticationLocal
   final SecureLocalStorageAdapter _secureLocalStorageAdapter;
 
   @override
-  Future<void> eraseAuthenticationInfo() async {
+  Future<void> eraseAuthInfo() async {
     await _secureLocalStorageAdapter.delete(
-      key: LocalStorageConstants.authenticationInfoKey,
+      key: LocalStorageConstants.authenticationInfoStorageKey,
     );
   }
 
   @override
-  Future<AuthenticationInfo?> readAuthenticationInfo() async {
+  Future<AuthenticationInfo?> readAuthInfo() async {
     final value = await _secureLocalStorageAdapter.read(
-      key: LocalStorageConstants.authenticationInfoKey,
+      key: LocalStorageConstants.authenticationInfoStorageKey,
     );
+
     if (value != null) {
       return AuthenticationInfo.fromJson(value);
     } else {
@@ -39,11 +40,11 @@ class AuthenticationLocalDataSourceImplementation implements AuthenticationLocal
   }
 
   @override
-  Future<void> storeAuthenticationInfo({
+  Future<void> storeAuthInfo({
     required AuthenticationInfo value,
   }) async {
     await _secureLocalStorageAdapter.write(
-      key: LocalStorageConstants.authenticationInfoKey,
+      key: LocalStorageConstants.authenticationInfoStorageKey,
       value: value.toJson(),
     );
   }

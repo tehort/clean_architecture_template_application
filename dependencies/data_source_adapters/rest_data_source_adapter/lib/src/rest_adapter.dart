@@ -5,7 +5,7 @@ abstract class RestAdapter {
     required String path,
     required String baseUrl,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   });
 
   Future<Response<T>> post<T>({
@@ -13,7 +13,7 @@ abstract class RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   });
 
   Future<Response<T>> put<T>({
@@ -21,7 +21,7 @@ abstract class RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   });
 
   Future<Response<T>> delete<T>({
@@ -29,6 +29,6 @@ abstract class RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   });
 }

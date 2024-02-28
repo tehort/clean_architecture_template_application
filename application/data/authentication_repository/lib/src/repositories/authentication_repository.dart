@@ -12,6 +12,20 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
   final AuthenticationLocalDataSourceContract _authenticationLocalDataSource;
 
   @override
+  Future<AuthenticationInfo> refreshToken() async {
+    final response = await _authenticationRemoteDataSource.refreshToken();
+
+    return AuthenticationInfo(
+      id: response.id,
+      firstName: response.firstName!,
+      lastName: response.lastName!,
+      username: response.username!,
+      jwtToken: response.jwtToken!,
+      keepSignedIn: true,
+    );
+  }
+
+  @override
   Future<AuthenticationInfo> signIn({
     required String username,
     required String password,
@@ -24,15 +38,10 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
 
     return AuthenticationInfo(
       id: response.id,
-      title: response.title!,
       firstName: response.firstName!,
       lastName: response.lastName!,
-      email: response.email!,
-      role: response.role!,
-      isVerified: response.isVerified,
+      username: response.username!,
       jwtToken: response.jwtToken!,
-      created: response.created,
-      updated: response.updated,
       keepSignedIn: keepSignedIn,
     );
   }
@@ -69,21 +78,21 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
   }
 
   @override
-  Future<void> eraseAuthenticationInfo() async {
-    await _authenticationLocalDataSource.eraseAuthenticationInfo();
+  Future<void> eraseAuthInfo() async {
+    await _authenticationLocalDataSource.eraseAuthInfo();
   }
 
   @override
-  Future<AuthenticationInfo?> readAuthenticationInfo() async {
-    return _authenticationLocalDataSource.readAuthenticationInfo();
+  Future<AuthenticationInfo?> readAuthInfo() async {
+    return _authenticationLocalDataSource.readAuthInfo();
   }
 
   @override
-  Future<void> storeAuthenticationInfo({
-    required AuthenticationInfo authenticationInfo,
+  Future<void> storeAuthInfo({
+    required AuthenticationInfo value,
   }) async {
-    await _authenticationLocalDataSource.storeAuthenticationInfo(
-      value: authenticationInfo,
+    await _authenticationLocalDataSource.storeAuthInfo(
+      value: value,
     );
   }
 }

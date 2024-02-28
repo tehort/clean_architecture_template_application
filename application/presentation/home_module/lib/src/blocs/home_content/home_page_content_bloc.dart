@@ -9,8 +9,9 @@ part 'home_page_content_event.dart';
 part 'home_page_content_state.dart';
 
 class HomePageContentBloc extends Bloc<HomePageContentEvent, HomePageContentState> {
-  HomePageContentBloc({required GetLoggedUserUseCase getLoggedUserUseCase})
-      : _getLoggedUserUseCase = getLoggedUserUseCase,
+  HomePageContentBloc({
+    required GetLoggedUserUseCase getLoggedUserUseCase,
+  })  : _getLoggedUserUseCase = getLoggedUserUseCase,
         super(HomePageContentLoadingState()) {
     on<LoggedUserRequestEvent>(_onLoggedUserRequestEvent);
   }

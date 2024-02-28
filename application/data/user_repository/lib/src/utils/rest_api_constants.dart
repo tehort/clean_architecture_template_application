@@ -1,11 +1,11 @@
 class RestApiEndpointsConstants {
   static const String baseUrl = 'http://localhost:4000/';
 
-  static const String _accounts = 'accounts';
+  static const String _users = 'users';
 
-  static const String getAccounts = _accounts;
-  static const String postAccount = _accounts;
-  static String getAccount({required int id}) => '$_accounts/$id';
-  static String putAccount({required int id}) => '$_accounts/$id';
-  static String deleteAccount({required int id}) => '$_accounts/$id';
+  static const String getAccounts = _users;
+  static const String postAccount = _users;
+  static String getUser({required int id}) => '$_users/$id';
+  static String putUser({required int id}) => '$_users/$id';
+  static String deleteUser({required int id}) => '$_users/$id';
 }

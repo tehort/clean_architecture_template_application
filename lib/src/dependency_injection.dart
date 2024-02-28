@@ -17,11 +17,12 @@ void configureDependencyInjection() {
 }
 
 void _setupDataDependencies() {
-  ServiceLocator.registerLazySingleton<RestAdapter>(
-    RestAdapterImplementation.new,
-  );
   ServiceLocator.registerFactory<SecureLocalStorageAdapter>(
     SecureLocalStorageAdapterImplementation.new,
+  );
+
+  ServiceLocator.registerLazySingleton<RestAdapter>(
+    RestAdapterImplementation.new,
   );
 
   ServiceLocator.registerFactory<AuthenticationRemoteDataSourceContract>(
@@ -78,6 +79,11 @@ void _setupDomainUsecasesDependencies() {
   );
   ServiceLocator.registerFactory(
     () => SignOutUseCase(
+      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
+    ),
+  );
+  ServiceLocator.registerFactory(
+    () => RefreshTokenUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class SignInResponseModel extends Equatable {
-  const SignInResponseModel({
+class RefreshTokenResponseModel extends Equatable {
+  const RefreshTokenResponseModel({
     required this.id,
     this.firstName,
     this.lastName,
@@ -11,8 +11,8 @@ class SignInResponseModel extends Equatable {
     this.jwtToken,
   });
 
-  factory SignInResponseModel.fromMap(Map<String, dynamic> map) {
-    return SignInResponseModel(
+  factory RefreshTokenResponseModel.fromMap(Map<String, dynamic> map) {
+    return RefreshTokenResponseModel(
       id: map['id']?.toInt() ?? 0,
       firstName: map['firstName'],
       lastName: map['lastName'],
@@ -21,7 +21,7 @@ class SignInResponseModel extends Equatable {
     );
   }
 
-  factory SignInResponseModel.fromJson(String source) => SignInResponseModel.fromMap(json.decode(source));
+  factory RefreshTokenResponseModel.fromJson(String source) => RefreshTokenResponseModel.fromMap(json.decode(source));
 
   final int id;
   final String? firstName;
@@ -51,9 +51,6 @@ class SignInResponseModel extends Equatable {
     }
     if (username != null) {
       result.addAll({'email': username});
-    }
-    if (jwtToken != null) {
-      result.addAll({'jwtToken': jwtToken});
     }
     result.addAll({'id': id});
 

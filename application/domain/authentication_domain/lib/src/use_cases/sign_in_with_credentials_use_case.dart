@@ -19,12 +19,12 @@ class SignInWithCredentialsUseCase {
         password: password,
         keepSignedIn: keepSignedIn,
       );
-      await _authenticationRepository.storeAuthenticationInfo(
-        authenticationInfo: response,
+      await _authenticationRepository.storeAuthInfo(
+        value: response,
       );
       return Success(response);
     } on Exception catch (e) {
-      await _authenticationRepository.eraseAuthenticationInfo();
+      await _authenticationRepository.eraseAuthInfo();
       return Future(() => Failure(e));
     }
   }

@@ -1,9 +1,4 @@
-import 'package:authentication_repository/src/models/sign_in_request_model.dart';
-import 'package:authentication_repository/src/models/sign_in_response_model.dart';
-import 'package:authentication_repository/src/models/sign_up_request_model.dart';
-import 'package:authentication_repository/src/models/sign_up_response_model.dart';
-import 'package:authentication_repository/src/models/verify_email_request_model.dart';
-import 'package:authentication_repository/src/models/verify_email_response_model.dart';
+import 'package:authentication_repository/src/models/models.dart';
 import 'package:authentication_repository/src/utils/rest_api_constants.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 
@@ -26,6 +21,8 @@ abstract class AuthenticationRemoteDataSourceContract {
   Future<VerifyEmailResponseModel> verifyEmail({
     required String token,
   });
+
+  Future<RefreshTokenResponseModel> refreshToken();
 }
 
 class RemoteAuthenticationDataSourceImplementation implements AuthenticationRemoteDataSourceContract {
@@ -43,8 +40,9 @@ class RemoteAuthenticationDataSourceImplementation implements AuthenticationRemo
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
       path: RestApiEndpointsConstants.signIn,
+      requiresAuthToken: false,
       data: SignInRequestModel(
-        email: username,
+        username: username,
         password: password,
       ).toJson(),
     );
@@ -71,6 +69,7 @@ class RemoteAuthenticationDataSourceImplementation implements AuthenticationRemo
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
       path: RestApiEndpointsConstants.signUp,
+      requiresAuthToken: false,
       data: SignUpRequestModel(
         title: title,
         firstName: firstName,
@@ -96,6 +95,7 @@ class RemoteAuthenticationDataSourceImplementation implements AuthenticationRemo
     final response = await _apiClient.post(
       baseUrl: RestApiEndpointsConstants.baseUrl,
       path: RestApiEndpointsConstants.verifyEmail,
+      requiresAuthToken: false,
       data: VerifyEmailRequestModel(
         token: token,
       ).toJson(),
@@ -103,6 +103,21 @@ class RemoteAuthenticationDataSourceImplementation implements AuthenticationRemo
 
     if (response.statusCode == 200) {
       return VerifyEmailResponseModel.fromMap(response.data);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<RefreshTokenResponseModel> refreshToken() async {
+    final response = await _apiClient.post(
+      baseUrl: RestApiEndpointsConstants.baseUrl,
+      path: RestApiEndpointsConstants.refreshToken,
+      requiresAuthToken: false,
+    );
+
+    if (response.statusCode == 200) {
+      return RefreshTokenResponseModel.fromMap(response.data);
     } else {
       throw Exception();
     }

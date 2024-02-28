@@ -18,18 +18,6 @@ class TokenInformationPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Text('Created: ${state.authenticationInfo.created}'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text('Updated: ${state.authenticationInfo.updated ?? 'N/A'}'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text('Role: ${state.authenticationInfo.role}'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
                   child: Text('JWT Token: ${state.authenticationInfo.jwtToken}'),
                 ),
                 const Spacer(),

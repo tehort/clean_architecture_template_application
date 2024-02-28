@@ -11,14 +11,18 @@ class RestAdapterImplementation extends RestAdapter {
     required String path,
     required String baseUrl,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   }) async {
     await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
     return _dio.get<T>(
       path,
       queryParameters: queryParameters,
-      options: options,
+      options: Options(
+        extra: <String, Object?>{
+          'requiresAuthToken': requiresAuthToken,
+        },
+      ),
     );
   }
 
@@ -28,7 +32,7 @@ class RestAdapterImplementation extends RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   }) async {
     await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
@@ -36,7 +40,11 @@ class RestAdapterImplementation extends RestAdapter {
       path,
       data: data,
       queryParameters: queryParameters,
-      options: options,
+      options: Options(
+        extra: <String, Object?>{
+          'requiresAuthToken': requiresAuthToken,
+        },
+      ),
     );
   }
 
@@ -46,7 +54,7 @@ class RestAdapterImplementation extends RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   }) async {
     await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
@@ -54,7 +62,11 @@ class RestAdapterImplementation extends RestAdapter {
       path,
       data: data,
       queryParameters: queryParameters,
-      options: options,
+      options: Options(
+        extra: <String, Object?>{
+          'requiresAuthToken': requiresAuthToken,
+        },
+      ),
     );
   }
 
@@ -64,7 +76,7 @@ class RestAdapterImplementation extends RestAdapter {
     required String baseUrl,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    bool requiresAuthToken = true,
   }) async {
     await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
@@ -72,7 +84,11 @@ class RestAdapterImplementation extends RestAdapter {
       path,
       data: data,
       queryParameters: queryParameters,
-      options: options,
+      options: Options(
+        extra: <String, Object?>{
+          'requiresAuthToken': requiresAuthToken,
+        },
+      ),
     );
   }
 }

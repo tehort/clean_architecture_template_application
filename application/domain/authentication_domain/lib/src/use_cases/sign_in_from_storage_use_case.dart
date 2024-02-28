@@ -10,13 +10,13 @@ class SignInFromStorageUseCase {
 
   Future<Result<AuthenticationInfo, Exception>> call() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      final authInfo = await _authenticationRepository.readAuthenticationInfo();
+      final authInfo = await _authenticationRepository.readAuthInfo();
       if (authInfo == null) {
         throw Exception('Token not found');
       }
       return Success(authInfo);
     } on Exception catch (e) {
+      await _authenticationRepository.eraseAuthInfo();
       return Future(() => Failure(e));
     }
   }

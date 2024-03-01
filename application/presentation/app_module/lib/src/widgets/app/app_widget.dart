@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
-            title: 'My App',
+            title: 'The Clean App',
             debugShowCheckedModeBanner: false,
             theme: state.themeData,
             onGenerateRoute: OnGenerateRoute.route,

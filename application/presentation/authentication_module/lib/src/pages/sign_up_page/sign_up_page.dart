@@ -1,6 +1,7 @@
 import 'package:authentication_module/authentication_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:purple_ui/purple_ui.dart';
 import 'package:service_locator/service_locator.dart';
 
 export 'sign_up_form.dart';
@@ -16,31 +17,36 @@ class SignUpPage extends StatelessWidget {
       value: ServiceLocator.get<SignUpBloc>(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Sign Up'),
+          title: const Text(
+            'Sign Up',
+          ),
           centerTitle: true,
         ),
-        body: BlocListener<SignUpBloc, SignUpState>(
-          listener: (context, state) {
-            if (state is SignUpErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage),
-                ),
-              );
-            } else if (state is SignUpShowSnackbarState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
-              // Navigator.pop(context);
-              showDialog(
-                context: context,
-                builder: (_) => const VerifyEmailDialog(),
-              );
-            }
-          },
-          child: const SignUpForm(),
+        body: PuiBackgroundGradient(
+          opacity: 0.50,
+          child: BlocListener<SignUpBloc, SignUpState>(
+            listener: (context, state) {
+              if (state is SignUpErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                  ),
+                );
+              } else if (state is SignUpShowSnackbarState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                  ),
+                );
+                // Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (_) => const VerifyEmailDialog(),
+                );
+              }
+            },
+            child: const SignUpForm(),
+          ),
         ),
       ),
     );

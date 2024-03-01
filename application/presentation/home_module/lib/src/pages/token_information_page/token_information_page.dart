@@ -16,10 +16,10 @@ class TokenInformationPage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text('JWT Token: ${state.authenticationInfo.jwtToken}'),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8),
+                //   child: Text('JWT Token: ${state.authenticationInfo.jwtToken}'),
+                // ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8),

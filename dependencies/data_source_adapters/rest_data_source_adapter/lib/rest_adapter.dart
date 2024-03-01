@@ -1,2 +1,2 @@
-export 'src/rest_adapter.dart';
-export 'src/rest_adapter_implementation.dart';
+export 'src/rest_adapter/rest_adapter.dart';
+export 'src/utils/utils.dart';

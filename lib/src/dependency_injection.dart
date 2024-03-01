@@ -2,8 +2,10 @@ import 'package:app_module/app_module.dart';
 import 'package:authentication_domain/authentication_domain.dart';
 import 'package:authentication_module/authentication_module.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:authentication_repository/authentication_repository.dart' as authentication_repository;
 import 'package:home_module/home_module.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
+import 'package:rest_data_source_adapter/rest_adapter.dart' as rest_data_source_adapter;
 import 'package:secure_local_storage_data_source_adapter/secure_local_storage_data_source_adapter.dart';
 import 'package:service_locator/service_locator.dart';
 import 'package:user_domain/user_domain.dart';
@@ -22,7 +24,12 @@ void _setupDataDependencies() {
   );
 
   ServiceLocator.registerLazySingleton<RestAdapter>(
-    RestAdapterImplementation.new,
+    () => RestAdapterImplementation(
+      localStorageConstants: rest_data_source_adapter.LocalStorageConstants(
+        authorizationTokenKey: authentication_repository.LocalStorageConstants.authenticationInfoStorageKey,
+        requiresTokenAuthorizationKey: authentication_repository.LocalStorageConstants.requiresTokenAuthorizationKey,
+      ),
+    ),
   );
 
   ServiceLocator.registerFactory<AuthenticationRemoteDataSourceContract>(
@@ -72,11 +79,11 @@ void _setupDomainUsecasesDependencies() {
       authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
     ),
   );
-  ServiceLocator.registerFactory(
-    () => SignInFromStorageUseCase(
-      authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
-    ),
-  );
+  // ServiceLocator.registerFactory(
+  //   () => SignInFromStorageUseCase(
+  //     authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
+  //   ),
+  // );
   ServiceLocator.registerFactory(
     () => SignOutUseCase(
       authenticationRepository: ServiceLocator.get<AuthenticationRepositoryContract>(),
@@ -98,7 +105,8 @@ void _setupDomainUsecasesDependencies() {
 void _setupPresentationDependencies() {
   ServiceLocator.registerLazySingleton(
     () => AuthenticationBloc(
-      signInFromStorageUsecase: ServiceLocator.get<SignInFromStorageUseCase>(),
+      // signInFromStorageUsecase: ServiceLocator.get<SignInFromStorageUseCase>(),
+      refreshTokenUseCase: ServiceLocator.get<RefreshTokenUseCase>(),
       signOutUsecase: ServiceLocator.get<SignOutUseCase>(),
     ),
   );

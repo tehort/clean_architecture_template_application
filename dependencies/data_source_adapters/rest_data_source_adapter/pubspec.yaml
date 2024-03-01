@@ -6,9 +6,11 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+  cookie_jar: ^4.0.8
   dio: ^5.3.2
-  secure_local_storage_data_source_adapter:
-    path: ../secure_local_storage_data_source_adapter
+  dio_cookie_manager: ^3.1.1
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
+  test: ^1.16.3
   very_good_analysis: ^5.1.0

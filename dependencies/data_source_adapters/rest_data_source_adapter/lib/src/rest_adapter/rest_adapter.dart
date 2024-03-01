@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+export 'rest_adapter_implementation.dart';
+
 abstract class RestAdapter {
   Future<Response<T>> get<T>({
     required String path,

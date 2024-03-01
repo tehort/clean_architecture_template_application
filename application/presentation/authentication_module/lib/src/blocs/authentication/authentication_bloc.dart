@@ -8,9 +8,9 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
-    required SignInFromStorageUseCase signInFromStorageUsecase,
+    required RefreshTokenUseCase refreshTokenUseCase,
     required SignOutUseCase signOutUsecase,
-  })  : _signInFromStorageUsecase = signInFromStorageUsecase,
+  })  : _refreshTokenUseCase = refreshTokenUseCase,
         _signOutUsecase = signOutUsecase,
         super(const Loading()) {
     on<AppStarted>(_onAppStartedEvent);
@@ -18,29 +18,26 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<LoggedOut>(_onLoggedOutEvent);
   }
 
-  final SignInFromStorageUseCase _signInFromStorageUsecase;
+  final RefreshTokenUseCase _refreshTokenUseCase;
   final SignOutUseCase _signOutUsecase;
 
   Future<void> _onAppStartedEvent(AppStarted event, Emitter<AuthenticationState> emit) async {
     emit(const Loading());
-    final result = await _signInFromStorageUsecase.call();
+    final result = await _refreshTokenUseCase.call();
     switch (result) {
-      case Success<AuthenticationInfo, Exception>(value: final authenticationInfo):
-        emit(Authenticated(authenticationInfo: authenticationInfo));
-      case Failure<AuthenticationInfo, Exception>(exception: _):
+      case Success<void, Exception>(value: _):
+        emit(const Authenticated());
+      case Failure<void, Exception>(exception: _):
         emit(const Unauthenticated());
     }
   }
 
   void _onLoggedInEvent(LoggedIn event, Emitter<AuthenticationState> emit) {
-    emit(Authenticated(authenticationInfo: event.authenticationInfo));
+    emit(const Authenticated());
   }
 
   Future<void> _onLoggedOutEvent(LoggedOut event, Emitter<AuthenticationState> emit) async {
-    final result = await _signOutUsecase.call();
-    switch (result) {
-      default:
-        emit(const Unauthenticated());
-    }
+    await _signOutUsecase.call();
+    emit(const Unauthenticated());
   }
 }

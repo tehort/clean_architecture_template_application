@@ -25,20 +25,25 @@ class _SignUpFormState extends State<SignUpForm> {
                   padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const _SignUpInformation(),
-                        _TitleInputField(),
-                        _FirstNameInputField(),
-                        _LastNameInputField(),
-                        _EmailInputField(),
-                        _PasswordInputField(),
-                        _ConfirmPasswordInput(),
-                        _AcceptTermsCheckBox(),
-                        _SignUpButton(formKey: _formKey),
-                        const _ValidateEmailButton(),
-                      ],
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 500,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const _SignUpInformation(),
+                          _TitleInputField(),
+                          _FirstNameInputField(),
+                          _LastNameInputField(),
+                          _EmailInputField(),
+                          _PasswordInputField(),
+                          _ConfirmPasswordInput(),
+                          _AcceptTermsCheckBox(),
+                          _SignUpButton(formKey: _formKey),
+                          const _ValidateEmailButton(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -62,8 +67,21 @@ class _SignUpInformation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Sign up on App', style: Theme.of(context).textTheme.titleLarge),
-          Text('Create a free account on App and get started', style: Theme.of(context).textTheme.bodyLarge),
+          const Text(
+            'Sign up on App',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ),
+          Text(
+            'Create a free account on App and get started',
+            // style: Theme.of(context).textTheme.bodyLarge,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.75),
+              fontSize: 18,
+            ),
+          ),
         ],
       ),
     );
@@ -77,9 +95,19 @@ class _TitleInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_title_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Title',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         keyboardType: TextInputType.text,
         validator: validateField,
@@ -98,9 +126,19 @@ class _FirstNameInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_first_name_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'First Name',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         validator: validateField,
         keyboardType: TextInputType.text,
@@ -119,9 +157,19 @@ class _LastNameInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_last_name_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Last Name',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         keyboardType: TextInputType.text,
         validator: validateField,
@@ -140,9 +188,19 @@ class _EmailInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_email_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'E-mail',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         keyboardType: TextInputType.emailAddress,
         validator: validateEmail,
@@ -161,9 +219,19 @@ class _PasswordInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_password_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Password',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         keyboardType: TextInputType.text,
         obscureText: true,
@@ -183,9 +251,19 @@ class _ConfirmPasswordInput extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         key: const Key('sign_up_form_confirm_password_textField'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Confirm Password',
-          border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
         ),
         keyboardType: TextInputType.text,
         onChanged: (confirmPassword) {

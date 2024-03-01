@@ -14,20 +14,20 @@ class SignInForm extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Align(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(38, 0, 38, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const _AppText(),
-                      _UsernameInputField(),
-                      _PasswordInputField(),
-                      const _SignInButton(),
-                      const _ForgotPasswordButton(),
-                      const _SignUpText(),
-                      const _SignUpButton(),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const _TitleSection(),
+                    _Section(
+                      children: [
+                        _UsernameInputField(),
+                        _PasswordInputField(),
+                        const _SignInButton(),
+                        const _ForgotPasswordButton(),
+                      ],
+                    ),
+                    const _SignUpSection(),
+                  ],
                 ),
               ),
             ),
@@ -39,17 +39,39 @@ class SignInForm extends StatelessWidget {
   }
 }
 
-class _AppText extends StatelessWidget {
-  const _AppText();
+class _Section extends StatelessWidget {
+  const _Section({
+    required this.children,
+  });
+
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 30, top: 30),
-      child: Text(
-        'My App',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Container(
+      constraints: const BoxConstraints(
+        maxWidth: 500,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: children,
+      ),
+    );
+  }
+}
+
+class _TitleSection extends StatelessWidget {
+  const _TitleSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'The Clean App',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     );
   }
@@ -58,12 +80,28 @@ class _AppText extends StatelessWidget {
 class _UsernameInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('loginForm_usernameInput_textField'),
-      decoration: const InputDecoration(labelText: 'Username'),
-      onChanged: (username) {
-        context.read<SignInBloc>().add(SignInUsernameChangedEvent(username: username));
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('loginForm_usernameInput_textField'),
+        decoration: InputDecoration(
+          labelText: 'Username',
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+        ),
+        onChanged: (username) {
+          context.read<SignInBloc>().add(SignInUsernameChangedEvent(username: username));
+        },
+      ),
     );
   }
 }
@@ -71,16 +109,30 @@ class _UsernameInputField extends StatelessWidget {
 class _PasswordInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: const Key('loginForm_passwordInput_textField'),
-      decoration: const InputDecoration(
-        labelText: 'Password',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: TextFormField(
+        key: const Key('loginForm_passwordInput_textField'),
+        decoration: InputDecoration(
+          labelText: 'Password',
+          labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+        ),
+        obscureText: true,
+        keyboardType: TextInputType.text,
+        onChanged: (password) {
+          context.read<SignInBloc>().add(SignInPasswordChangedEvent(password: password));
+        },
       ),
-      obscureText: true,
-      keyboardType: TextInputType.text,
-      onChanged: (password) {
-        context.read<SignInBloc>().add(SignInPasswordChangedEvent(password: password));
-      },
     );
   }
 }
@@ -90,38 +142,51 @@ class _SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        context.read<SignInBloc>().add(SignInSignInButtonPressedEvent());
-      },
-      child: const Text('Sign in'),
-    );
-  }
-}
-
-class _SignUpText extends StatelessWidget {
-  const _SignUpText();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      "Don't have an account yet?",
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => Navigator.pushNamed(context, PagesNameConstants.signUpPage),
-      child: const Text(
-        'Sign up',
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.all(15),
+          visualDensity: VisualDensity.comfortable,
+          side: BorderSide(color: Colors.white.withOpacity(0.75)),
+        ),
+        onPressed: () {
+          context.read<SignInBloc>().add(SignInSignInButtonPressedEvent());
+        },
+        child: const Text('SIGN IN'),
       ),
+    );
+  }
+}
+
+class _SignUpSection extends StatelessWidget {
+  const _SignUpSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Don't have an account yet?",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white.withOpacity(0.5),
+          ),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pushNamed(context, PagesNameConstants.signUpPage),
+          child: const Text(
+            'Sign up',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -131,10 +196,14 @@ class _ForgotPasswordButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextButton(
+    return TextButton(
       onPressed: null,
       child: Text(
         'Forgot Password?',
+        style: TextStyle(
+          fontSize: 18,
+          color: Colors.white.withOpacity(0.5),
+        ),
       ),
     );
   }

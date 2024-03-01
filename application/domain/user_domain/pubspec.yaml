@@ -9,7 +9,7 @@ dependencies:
   authentication_domain:
     path: ../authentication_domain
   core:
-    path: ../../../dependencies/core
+    path: ../core
   equatable: ^2.0.5
 
 dev_dependencies:

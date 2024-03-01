@@ -9,7 +9,7 @@ dependencies:
   authentication_domain:
     path: ../../domain/authentication_domain
   core:
-    path: ../../../dependencies/core
+    path: ../../domain/core
   equatable: ^2.0.5
   rest_data_source_adapter:
     path: ../../../dependencies/data_source_adapters/rest_data_source_adapter

@@ -12,7 +12,7 @@ dependencies:
     path: ../authentication_module
   bloc: ^8.1.2
   core:
-    path: ../../../dependencies/core
+    path: ../../domain/core
   equatable: ^2.0.5
   flutter:
     sdk: flutter

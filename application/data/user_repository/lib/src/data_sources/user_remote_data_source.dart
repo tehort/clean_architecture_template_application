@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
-import 'package:user_domain/user_domain.dart';
 import 'package:user_repository/src/models/create_user_request_model.dart';
 import 'package:user_repository/src/models/delete_user_request_model.dart';
 import 'package:user_repository/src/utils/rest_api_constants.dart';

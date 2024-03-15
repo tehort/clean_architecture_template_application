@@ -21,6 +21,7 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
       lastName: response.lastName!,
       username: response.username!,
       jwtToken: response.jwtToken!,
+      refreshToken: response.refreshToken!,
       keepSignedIn: true,
     );
   }
@@ -42,6 +43,7 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
       lastName: response.lastName!,
       username: response.username!,
       jwtToken: response.jwtToken!,
+      refreshToken: response.refreshToken!,
       keepSignedIn: keepSignedIn,
     );
   }
@@ -78,21 +80,62 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
   }
 
   @override
-  Future<void> eraseAuthInfo() async {
-    await _authenticationLocalDataSource.eraseAuthInfo();
+  Future<void> eraseAuthorizationToken() async {
+    await _authenticationLocalDataSource.eraseAuthorizationToken();
   }
 
   @override
-  Future<AuthenticationInfo?> readAuthInfo() async {
-    return _authenticationLocalDataSource.readAuthInfo();
+  Future<void> eraseRefreshToken() async {
+    await _authenticationLocalDataSource.eraseRefreshToken();
   }
 
   @override
-  Future<void> storeAuthInfo({
+  Future<String?> readAuthorizationToken() async {
+    return _authenticationLocalDataSource.readAuthorizationToken();
+  }
+
+  @override
+  Future<String?> readRefreshToken() async {
+    return _authenticationLocalDataSource.readRefreshToken();
+  }
+
+  @override
+  Future<void> storeAuthorizationToken({
+    required String value,
+  }) async {
+    await _authenticationLocalDataSource.storeAuthorizationToken(
+      value: value,
+    );
+  }
+
+  @override
+  Future<void> storeRefreshToken({
+    required String value,
+  }) async {
+    await _authenticationLocalDataSource.storeRefreshToken(
+      value: value,
+    );
+  }
+
+  @override
+  Future<void> eraseStoredUserInfo() async {}
+
+  @override
+  Future<AuthenticationInfo?> readStoredUserInfo() async {
+    final response = await _authenticationLocalDataSource.readRefreshToken();
+    if (response == null) {
+      return null;
+    } else {
+      return AuthenticationInfo.fromJson(response);
+    }
+  }
+
+  @override
+  Future<void> storeStoredUserInfo({
     required AuthenticationInfo value,
   }) async {
-    await _authenticationLocalDataSource.storeAuthInfo(
-      value: value,
+    await _authenticationLocalDataSource.storeRefreshToken(
+      value: value.toJson(),
     );
   }
 }

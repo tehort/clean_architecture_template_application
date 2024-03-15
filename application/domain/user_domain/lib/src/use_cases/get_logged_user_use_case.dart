@@ -14,10 +14,11 @@ class GetLoggedUserUseCase {
 
   Future<Result<User, Exception>> call() async {
     try {
-      final authInfo = await _authenticationRepository.readAuthInfo();
+      final authInfo = await _authenticationRepository.readStoredUserInfo();
       if (authInfo == null) {
-        throw Exception('Token not found');
+        throw Exception();
       }
+
       final response = await _userRepository.getSingleUser(
         id: authInfo.id,
       );

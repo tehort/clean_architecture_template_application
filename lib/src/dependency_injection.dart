@@ -25,9 +25,14 @@ void _setupDataDependencies() {
 
   ServiceLocator.registerLazySingleton<RestAdapter>(
     () => RestAdapterImplementation(
-      localStorageConstants: rest_data_source_adapter.LocalStorageConstants(
-        authorizationTokenKey: authentication_repository.LocalStorageConstants.authenticationInfoStorageKey,
-        requiresTokenAuthorizationKey: authentication_repository.LocalStorageConstants.requiresTokenAuthorizationKey,
+      localStorageConstants: rest_data_source_adapter.Constants(
+        requireAuthorizationTokenHeaderKey:
+            authentication_repository.LocalStorageConstants.requireAuthorizationTokenHeaderKey,
+        authorizationTokenStorageKey: authentication_repository.LocalStorageConstants.authorizationTokenStorageKey,
+        authorizationTokenApiKey: authentication_repository.LocalStorageConstants.authorizationTokenApiHeaderKey,
+        requireRefreshTokenOptionKey: authentication_repository.LocalStorageConstants.requireRefreshTokenOptionKey,
+        refreshTokenStorageKey: authentication_repository.LocalStorageConstants.refreshTokenStorageKey,
+        refreshTokenApiKey: authentication_repository.LocalStorageConstants.refreshTokenApiHeaderKey,
       ),
     ),
   );

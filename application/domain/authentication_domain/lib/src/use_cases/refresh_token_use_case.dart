@@ -11,12 +11,14 @@ class RefreshTokenUseCase {
   Future<Result<void, Exception>> call() async {
     try {
       final refreshedToken = await _authenticationRepository.refreshToken();
-      await _authenticationRepository.storeAuthInfo(
-        value: refreshedToken,
+      await _authenticationRepository.storeAuthorizationToken(
+        value: refreshedToken.refreshToken,
       );
+
       return const Success(null);
     } on Exception catch (e) {
-      await _authenticationRepository.eraseAuthInfo();
+      await _authenticationRepository.eraseAuthorizationToken();
+      await _authenticationRepository.refreshToken();
       return Future(() => Failure(e));
     }
   }

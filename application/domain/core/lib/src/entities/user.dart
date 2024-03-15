@@ -27,7 +27,12 @@ class User extends Equatable {
   final String username;
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+        id,
+        firstName,
+        lastName,
+        username,
+      ];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{}

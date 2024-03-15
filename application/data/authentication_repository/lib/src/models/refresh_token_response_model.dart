@@ -9,6 +9,7 @@ class RefreshTokenResponseModel extends Equatable {
     this.lastName,
     this.username,
     this.jwtToken,
+    this.refreshToken,
   });
 
   factory RefreshTokenResponseModel.fromMap(Map<String, dynamic> map) {
@@ -18,6 +19,7 @@ class RefreshTokenResponseModel extends Equatable {
       lastName: map['lastName'],
       username: map['username'],
       jwtToken: map['jwtToken'],
+      refreshToken: map['refreshToken'],
     );
   }
 
@@ -28,6 +30,7 @@ class RefreshTokenResponseModel extends Equatable {
   final String? lastName;
   final String? username;
   final String? jwtToken;
+  final String? refreshToken;
 
   @override
   List<Object?> get props {
@@ -37,6 +40,7 @@ class RefreshTokenResponseModel extends Equatable {
       lastName,
       username,
       jwtToken,
+      refreshToken,
     ];
   }
 

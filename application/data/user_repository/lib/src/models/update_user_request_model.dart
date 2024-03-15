@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
-import 'package:user_domain/user_domain.dart';
 
 class UpdateUserRequestModel extends Equatable {
   const UpdateUserRequestModel({

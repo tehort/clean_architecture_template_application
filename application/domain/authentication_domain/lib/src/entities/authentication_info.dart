@@ -9,6 +9,7 @@ class AuthenticationInfo extends Equatable {
     required this.lastName,
     required this.username,
     required this.jwtToken,
+    required this.refreshToken,
     required this.keepSignedIn,
   });
 
@@ -19,6 +20,7 @@ class AuthenticationInfo extends Equatable {
       lastName: map['lastName'] ?? '',
       username: map['username'] ?? '',
       jwtToken: map['jwtToken'] ?? '',
+      refreshToken: map['refreshToken'] ?? '',
       keepSignedIn: map['keepSignedIn'] ?? false,
     );
   }
@@ -30,6 +32,7 @@ class AuthenticationInfo extends Equatable {
   final String lastName;
   final String username;
   final String jwtToken;
+  final String refreshToken;
   final bool keepSignedIn;
 
   @override
@@ -40,6 +43,7 @@ class AuthenticationInfo extends Equatable {
       lastName,
       username,
       jwtToken,
+      refreshToken,
       keepSignedIn,
     ];
   }
@@ -51,6 +55,7 @@ class AuthenticationInfo extends Equatable {
       ..addAll({'lastName': lastName})
       ..addAll({'username': username})
       ..addAll({'jwtToken': jwtToken})
+      ..addAll({'refreshToken': refreshToken})
       ..addAll({'keepSignedIn': keepSignedIn});
   }
 

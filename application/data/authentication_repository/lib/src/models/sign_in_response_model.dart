@@ -9,6 +9,7 @@ class SignInResponseModel extends Equatable {
     this.lastName,
     this.username,
     this.jwtToken,
+    this.refreshToken,
   });
 
   factory SignInResponseModel.fromMap(Map<String, dynamic> map) {
@@ -18,6 +19,7 @@ class SignInResponseModel extends Equatable {
       lastName: map['lastName'],
       username: map['username'],
       jwtToken: map['jwtToken'],
+      refreshToken: map['refreshToken'],
     );
   }
 
@@ -28,6 +30,7 @@ class SignInResponseModel extends Equatable {
   final String? lastName;
   final String? username;
   final String? jwtToken;
+  final String? refreshToken;
 
   @override
   List<Object?> get props {
@@ -37,6 +40,7 @@ class SignInResponseModel extends Equatable {
       lastName,
       username,
       jwtToken,
+      refreshToken,
     ];
   }
 
@@ -54,6 +58,9 @@ class SignInResponseModel extends Equatable {
     }
     if (jwtToken != null) {
       result.addAll({'jwtToken': jwtToken});
+    }
+    if (refreshToken != null) {
+      result.addAll({'refreshToken': refreshToken});
     }
     result.addAll({'id': id});
 

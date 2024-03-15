@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:user_domain/user_domain.dart';
 import 'package:user_repository/src/data_sources/user_remote_data_source.dart';
 

@@ -10,7 +10,7 @@ class SignOutUseCase {
 
   Future<Result<void, Exception>> call() async {
     try {
-      await _authenticationRepository.eraseAuthInfo();
+      await _authenticationRepository.eraseAuthorizationToken();
       return const Success(null);
     } on Exception catch (e) {
       return Future(() => Failure(e));

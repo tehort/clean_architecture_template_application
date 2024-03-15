@@ -23,11 +23,27 @@ abstract class AuthenticationRepositoryContract {
 
   Future<AuthenticationInfo> refreshToken();
 
-  Future<void> storeAuthInfo({
+  Future<void> storeAuthorizationToken({
+    required String value,
+  });
+
+  Future<void> storeRefreshToken({
+    required String value,
+  });
+
+  Future<void> storeStoredUserInfo({
     required AuthenticationInfo value,
   });
 
-  Future<void> eraseAuthInfo();
+  Future<void> eraseAuthorizationToken();
 
-  Future<AuthenticationInfo?> readAuthInfo();
+  Future<void> eraseRefreshToken();
+
+  Future<void> eraseStoredUserInfo();
+
+  Future<String?> readAuthorizationToken();
+
+  Future<String?> readRefreshToken();
+
+  Future<AuthenticationInfo?> readStoredUserInfo();
 }

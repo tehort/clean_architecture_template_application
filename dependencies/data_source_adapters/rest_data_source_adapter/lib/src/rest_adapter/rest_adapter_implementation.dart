@@ -1,8 +1,7 @@
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
-import 'package:rest_data_source_adapter/src/rest_adapter/interceptors/authentication_interceptor.dart';
+import 'package:rest_data_source_adapter/src/rest_adapter/interceptors/authorization_interceptor.dart';
+import 'package:rest_data_source_adapter/src/rest_adapter/interceptors/refresh_token_interceptor.dart';
 
 class RestAdapterImplementation extends RestAdapter {
   RestAdapterImplementation({
@@ -10,13 +9,13 @@ class RestAdapterImplementation extends RestAdapter {
   })  : _dio = Dio(),
         _localStorageConstants = localStorageConstants {
     _dio.interceptors.addAll([
-      AuthenticationInterceptor(localStorageConstants: localStorageConstants),
-      CookieManager(CookieJar()),
+      RefreshTokenInterceptor(localStorageConstants: localStorageConstants),
+      AuthorizationInterceptor(localStorageConstants: localStorageConstants),
     ]);
   }
 
   final Dio _dio;
-  final LocalStorageConstants _localStorageConstants;
+  final Constants _localStorageConstants;
 
   @override
   Future<Response<T>> get<T>({
@@ -32,7 +31,7 @@ class RestAdapterImplementation extends RestAdapter {
       queryParameters: queryParameters,
       options: Options(
         extra: <String, Object?>{
-          _localStorageConstants.requiresTokenAuthorizationKey: requiresAuthToken,
+          _localStorageConstants.requireAuthorizationTokenHeaderKey: requiresAuthToken,
         },
       ),
     );
@@ -45,6 +44,7 @@ class RestAdapterImplementation extends RestAdapter {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool requiresAuthToken = true,
+    bool requiresRefreshToken = false,
   }) async {
     await Future.delayed(const Duration(milliseconds: 150));
     _dio.options.baseUrl = baseUrl;
@@ -54,8 +54,8 @@ class RestAdapterImplementation extends RestAdapter {
       queryParameters: queryParameters,
       options: Options(
         extra: <String, Object?>{
-          _localStorageConstants.requiresTokenAuthorizationKey: requiresAuthToken,
-          // 'Cookie': 'JSESSIONID=1234567890',
+          _localStorageConstants.requireAuthorizationTokenHeaderKey: requiresAuthToken,
+          _localStorageConstants.requireRefreshTokenOptionKey: requiresRefreshToken,
         },
       ),
     );
@@ -77,7 +77,7 @@ class RestAdapterImplementation extends RestAdapter {
       queryParameters: queryParameters,
       options: Options(
         extra: <String, Object?>{
-          _localStorageConstants.requiresTokenAuthorizationKey: requiresAuthToken,
+          _localStorageConstants.requireAuthorizationTokenHeaderKey: requiresAuthToken,
         },
       ),
     );
@@ -99,7 +99,7 @@ class RestAdapterImplementation extends RestAdapter {
       queryParameters: queryParameters,
       options: Options(
         extra: <String, Object?>{
-          _localStorageConstants.requiresTokenAuthorizationKey: requiresAuthToken,
+          _localStorageConstants.requireAuthorizationTokenHeaderKey: requiresAuthToken,
         },
       ),
     );

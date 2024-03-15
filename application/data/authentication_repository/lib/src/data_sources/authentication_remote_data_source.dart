@@ -1,5 +1,5 @@
 import 'package:authentication_repository/src/models/models.dart';
-import 'package:authentication_repository/src/utils/rest_api_constants.dart';
+import 'package:authentication_repository/src/utils/constants.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 
 abstract class AuthenticationRemoteDataSourceContract {

@@ -6,8 +6,8 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
-  core:
-    path: ../core
+  core_domain:
+    path: ../core_domain
   equatable: ^2.0.5
 
 dev_dependencies:

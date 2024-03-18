@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 
 abstract class UserRepositoryContract {
   Future<void> createUser({

@@ -1,6 +1,6 @@
 import 'package:authentication_domain/authentication_domain.dart';
 import 'package:bloc/bloc.dart';
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 import 'package:equatable/equatable.dart';
 
 part 'authentication_event.dart';

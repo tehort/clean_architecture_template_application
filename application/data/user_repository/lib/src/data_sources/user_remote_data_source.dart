@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 import 'package:rest_data_source_adapter/rest_adapter.dart';
 import 'package:user_repository/src/models/create_user_request_model.dart';
 import 'package:user_repository/src/models/delete_user_request_model.dart';

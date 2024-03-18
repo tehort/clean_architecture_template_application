@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 import 'package:equatable/equatable.dart';
 
 class GetUserResponseModel extends Equatable {

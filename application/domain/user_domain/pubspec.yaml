@@ -8,8 +8,8 @@ environment:
 dependencies:
   authentication_domain:
     path: ../authentication_domain
-  core:
-    path: ../core
+  core_domain:
+    path: ../core_domain
   equatable: ^2.0.5
 
 dev_dependencies:

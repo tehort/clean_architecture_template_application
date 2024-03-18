@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:user_domain/user_domain.dart';
 

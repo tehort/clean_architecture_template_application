@@ -1,5 +1,5 @@
 import 'package:authentication_domain/authentication_domain.dart';
-import 'package:core/core.dart';
+import 'package:core_domain/core_domain.dart';
 
 class SignOutUseCase {
   SignOutUseCase({
